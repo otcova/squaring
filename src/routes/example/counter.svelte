@@ -11,17 +11,32 @@
 </script>
 
 <div class="container">
-    <p>Number: {n}</p>
+    <div>Number: {n}</div>
 
-    <button on:click={increment}>+1</button>
-    <button on:click={decrement}>-1</button>
+    <div>
+        <button on:click={increment}>+1</button>
+        <button on:click={decrement}>-1</button>
+    </div>
 </div>
 
 <style>
     .container {
-        background: #222;
+        /* Center items */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 15px;
+
+        width: 100px;
+        height: 80px;
         padding: 10px;
+
+        background: #272727;
         border-radius: 10px;
-        border: 1px solid #000;
+        box-shadow: 0 0 2px 1px #0007;
+        border: 1px solid #0000;
+        
+        transition: all 100ms;
     }
 </style>
