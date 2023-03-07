@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev --open",
-		"deploy": "vite build && gh-pages --dotfiles -d build",
+		"upload": "vite build && gh-pages --dotfiles -d build",
 		"build": "vite build",
 		"preview": "vite preview --open"
 	},
