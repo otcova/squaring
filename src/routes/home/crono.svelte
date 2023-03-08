@@ -2,8 +2,6 @@
     import { onMount } from "svelte";
     import { solves } from "./solves";
 
-
-
     let millis = 0;
     $: segons = Math.trunc(millis / 1000);
     $: minuts = Math.trunc(millis / 1000 / 60);
@@ -35,8 +33,6 @@
         isPaused = true;
         millis = 0;
     }
-
-
 
     onMount(() => {
         setInterval(() => {
@@ -76,14 +72,13 @@
 <style>
 
     .container {
-        position: fixed;
+        position: absolute;
+        top: 5%;
+
         display: flex;
         justify-content: center;
         align-items: center;
         align-self: center;
-      
-        width: 100%;
-        font-size: 100px;
         text-align: center;
     }
 
@@ -91,9 +86,9 @@
         transition: all 1000ms;
         font-family: 'VT323', monospace;
         box-sizing: border-box;
-        padding: 3px;
-        width: 600px;
-        font-size: 150px;
+        padding: 5px 10px;
+        font-size: 200px;
+      
         text-align: center;
         border-radius: 10px;
         border: 3px solid white;

@@ -7,7 +7,7 @@
 		"upload": "vite build && gh-pages --dotfiles -d build",
 		"build": "vite build",
 		"preview": "vite preview --open",
-		"sync": "git pull && git add * && git commit -m 'xf' && git push && npm run upload" 
+		"sync": "git add * && git commit -m 'xf'&& git pull && git push && npm run upload" 
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^2.0.0",

@@ -22,6 +22,7 @@
 
     .link {
         transition: all 100ms;
+        box-sizing: border-box;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -35,12 +36,20 @@
     }
 
     .link:hover {
+        transition: all 1000ms;
+        font-size: 23px;
         background: #171717;
         color: white;
     }
 
     .link:focus {
-        font-size: 23px;
+        transition: all 100ms;
+        background: #373737;
+
+
+
+        color: #000;
+
     }
 
 </style>
