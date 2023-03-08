@@ -1,5 +1,5 @@
 <div class="navbar">
-    <a class="link" href=".">Home</a>
+    <a class="link" href="home">Home</a>
     <a class="link" href="example">Example</a>
 </div>
 
