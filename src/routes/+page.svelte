@@ -1,7 +1,4 @@
 <script lang="ts">
-    export const trailingSlash = 'always';
-
-    import HomePage from "./home/+page.svelte"
+    import { browser } from "$app/environment";
+    if (browser) window.location.replace("home");
 </script>
-
-<HomePage />
