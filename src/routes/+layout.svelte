@@ -15,8 +15,7 @@
         gap: 20px;
 
         box-sizing: border-box;
-        height: 100%; 
-        padding: 30px;
-        padding-top: 80px;
+        height: 100%;
+        
     }
 </style>

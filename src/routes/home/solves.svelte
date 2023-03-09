@@ -2,9 +2,9 @@
     import { element } from "svelte/internal";
     import Crono from "./crono.svelte";
     import { solves } from "./solves";
+    import TimeAnimation from "./time_animation.svelte";
     import { formatTime } from "./utils";
 
-    
 
     $: best = Math.min(...$solves.map(element => element.time));
     $: worst =  Math.max(...$solves.map(element => element.time));
@@ -25,16 +25,16 @@
 
     <div class="records">
         <div class="row">
-            <div class="left">BEST</div>
-            <div class="right"> {formatTime(best)}</div>
+            <div class="left">Best:</div>
+            <div class="right"><TimeAnimation time={best}/></div>
         </div>
         <div class="row">
-            <div class="left">WORST</div>
-            <div class="right"> {formatTime(worst)}</div>
+            <div class="left">Worst:</div>
+            <div class="right"><TimeAnimation time={worst}/></div>
         </div>
         <div class="row">
-            <div class="left">MEDIA</div>
-            <div class="right"> {formatTime(media)}</div>
+            <div class="left">Media:</div>
+            <div class="right"><TimeAnimation time={media}/></div>
         </div>
     </div>
 
@@ -54,7 +54,7 @@
         box-sizing: border-box;
         display: flex;
         padding: 10px;
-        background: rgb(59, 59, 70);
+        background: var(--panel);
         flex-direction: column;
         border-radius: 10px;
         width: 20%;
@@ -62,7 +62,9 @@
     }
 
     .records {
-        padding: 5px 10px;
+        padding: 0px 10px;
+        padding-top: 15px;
+        
         margin-bottom: 10px;
         display: block;
   
@@ -71,14 +73,14 @@
         font-size: 15px;
         
         width: 100%;
-        height: 15%;
+        height: 25%;
         border: 1px solid white;
         border-radius: 10px;
     }
     
     
     .row {
-        font-size: 15px;
+        font-size: 25px;
         justify-content: space-between;
         display: flex;
         flex-direction: row;
@@ -94,18 +96,23 @@
 
     .solves {
         overflow-y: scroll;
+        scroll-snap-type: y mandatory;  
         padding-right: 5px;
         flex-grow: 1;
+
+        background: var(--box);
+        border-radius: 10px;
     }
 
     .solve{
+        scroll-snap-align: start;
         display: flex;
         box-sizing: border-box;
 
         width: 100%;
         height: 30px;
         margin-bottom: 5px;
-        border: 1px solid white;
+        border: 2px solid white;
         border-radius: 10px;
     }
 
@@ -117,7 +124,6 @@
         justify-content: center;
         
         padding: 10px;
-        border: 1px solid white;
         border-radius: 10px;
 
         height: 100%;

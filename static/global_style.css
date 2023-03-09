@@ -10,20 +10,26 @@ body {
     src: url(./VT323-Regular.ttf);
 }
 
+:root {
+    --panel: rgb(50, 50, 65);
+    --box: rgb(60, 60, 75);
+}
+
 * {
     font-family: Arial;
-
+    user-select: none;
 }
 
 /* width */
 ::-webkit-scrollbar {
-    width: 3px;
+    width: 4px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
     border-radius: 10px;
-    background: #555;
+    background: #292929;
+
 }
 
 /* Handle */

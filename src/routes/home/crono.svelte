@@ -24,6 +24,8 @@
         const solve = {
             time: millis,
             scramble: "",
+            date: Date.now(),
+            hide: false,
         };
 
         $solves = [...$solves, solve];
@@ -53,27 +55,17 @@
     });
 </script>
 
-
-
 <div class="container">
     <h1 class="crono" class:keypress>
         {minutsStr}:{segonsStr}:{millisStr}
     </h1>
 </div>
 
-
-
-<!-- {#if isPaused}
-    <button on:click={start}> Start </button>
-{:else}
-    <button on:click={stop}> Stop </button>
-{/if} -->
-
 <style>
 
     .container {
         position: absolute;
-        top: 5%;
+        top: 10%;
 
         display: flex;
         justify-content: center;
@@ -86,7 +78,7 @@
         transition: all 1000ms;
         font-family: 'VT323', monospace;
         box-sizing: border-box;
-        padding: 5px 10px;
+        padding: 0px 10px;
         font-size: 200px;
       
         text-align: center;
@@ -95,6 +87,7 @@
     }
 
     .keypress {
+        font-size: 250px;
         box-sizing: border-box;
         color: cyan;
         border: 3px solid red;
