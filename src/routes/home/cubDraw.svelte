@@ -252,6 +252,15 @@ STOP!!!!
 <script lang="ts">
     import Console from "./console.svelte";
 
+    interface Cub {
+        white: string[];
+        orange: string[];
+        green: string[];
+        red: string[];
+        blue: string[];
+        yellow: string[];
+    }
+
     interface Colors {
         white: string[];
         orange: string[];
@@ -261,7 +270,15 @@ STOP!!!!
         yellow: string[];
     }
 
-    
+    let cub: Cub = {
+        white: [],
+        orange: [],
+        green: [],
+        red: [],
+        blue: [],
+        yellow: [],
+    };
+
     let colors: Colors = {
         white: [],
         orange: [],
@@ -271,6 +288,13 @@ STOP!!!!
         yellow: [],
     };
 
+    $: {
+        for (const face in cub) {
+            colors[face[4]] = face;
+        }
+        // colors = colors;
+    }
+
     function rotateFace(base: string[]) {
         [base[0], base[2], base[5], base[7]] = [base[5], base[0], base[7], base[2]];
         [base[1], base[3], base[4], base[6]] = [base[3], base[6], base[1], base[4]];
@@ -278,36 +302,28 @@ STOP!!!!
 
     function invertion(i: number) {
         switch (i) {
-            case 2:  return 5;
-            case 4: return 3;
-            case 7: return 0;
+            case 2:  return 6;
+            case 5: return 3;
+            case 8: return 0;
 
-            case 0: return 7;
-            case 3: return 4;
-            case 5: return 2;
+            case 0: return 8;
+            case 3: return 5;
+            case 6: return 2;
         }
-        throw "tonto";
+        return i;
     }
 
     function rol(k: number, n: number) {
         for (let i = 0; i < n; ++i) {
             switch (k) {
-                case 0: k = 2;
-                break;
-                case 1: k = 4;
-                break;
-                case 2: k = 7;
-                break;
-                case 3: k = 1;
-                break;    
-                case 4: k = 6;
-                break;
-                case 5: k = 0; 
-                break;
-                case 6: k = 3; 
-                break;
-                case 7: k = 5; 
-                break;
+                case 0: k = 2; break;
+                case 1: k = 5; break;
+                case 2: k = 8; break;
+                case 3: k = 1; break;    
+                case 5: k = 7; break;
+                case 6: k = 0; break;
+                case 7: k = 3; break;
+                case 8: k = 6; break;
             }
         }
         return k;
