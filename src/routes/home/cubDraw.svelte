@@ -261,6 +261,7 @@ STOP!!!!
         yellow: string[];
     }
 
+    
     let colors: Colors = {
         white: [],
         orange: [],
@@ -323,7 +324,7 @@ STOP!!!!
             [a[i], b[i], c[i], d[i]] = [d[i], a[i], b[i], c[i]];
         }
     }
-    
+
     function rotateFrontLayer(a: string[], b: string[], c: string[], d: string[], n: number[]) {
         for (const i of n) {
             [a[i], b[rol(i, 1)], c[rol(i, 2)], d[rol(i, 3)]] = [d[rol(i, 3)], a[i], b[rol(i, 1)], c[rol(i, 2)]];
@@ -339,13 +340,21 @@ STOP!!!!
     function scramble(algorithm: string) {
         let moves = algorithm.trim().split(" ");
 
+
+
         moves = moves.flatMap((move) => {
+            if (move[1] == "2") return [move[0], move[0]];
+            if (move[1] == "'") return [move[0], move[0], move[0]];
+            return [move];
+        }).flatMap((move) => {
             if (move == "M") return ["R", "L'"];
-            return [move]
+            if (move == "E") return ["U", "D'"];
+            if (move == "S") return ["F'", "B'"];
+            return [move];
         }).flatMap((move) => {
             if (move[1] == "2") return [move[0], move[0]];
             if (move[1] == "'") return [move[0], move[0], move[0]];
-            return [move]
+            return [move];
         });
 
         for (const move of moves) {
@@ -367,7 +376,7 @@ STOP!!!!
             } else if (move == "B") {
                 rotateBackLayer(colors.white, colors.orange, colors.yellow, colors.red, [0, 1, 2]);
                 rotateFace(colors.blue);
-            }
+            } 
             else alert("error algorithm");
         }
     }
@@ -379,7 +388,7 @@ STOP!!!!
     }
     original();
 
-    scramble("R B");
+    scramble("U D' R L' F B' U D'");
 </script>
 
 <div class="contenidor">
