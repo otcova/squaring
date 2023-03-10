@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { base } from "$app/paths";
-    import { object_without_properties } from "svelte/internal";
     import Console from "./console.svelte";
 
     interface Colors {
@@ -26,16 +24,54 @@
         [base[1], base[3], base[4], base[6]] = [base[3], base[6], base[1], base[4]];
     }
 
-    function rotateBorderClockWise(a: string[], b: string[], c: string[], d: string[], n: number[]) {
+    function invertion(i: number) {
+        switch (i) {
+            case 2:  return 5;
+            case 4: return 3;
+            case 7: return 0;
+
+            case 0: return 7;
+            case 3: return 4;
+            case 5: return 2;
+        }
+        throw "tonto";
+    }
+
+    function rol(k: number, n: number) {
+        for (let i = 0; i < n; ++i) {
+            switch (k) {
+                case 0: k = 2;
+                case 1: k = 4;
+                case 2: k = 7;
+                case 3: k = 1;
+    
+                case 4: k = 6;
+                case 5: k = 0; 
+                case 6: k = 3; 
+                case 7: k = 5; 
+            }
+        }
+        return k;
+    }
+
+    function rotateRightLeftLayer(a: string[], b: string[], c: string[], d: string[], n: number[]) {
+        for (const i of n) {
+            [a[i], b[i], c[invertion(i)], d[i]] = [d[i], a[i], b[i], c[invertion(i)]];
+        }
+    }
+
+    function rotateTopButtonLayer(a: string[], b: string[], c: string[], d: string[], n: number[]) {
         for (const i of n) {
             [a[i], b[i], c[i], d[i]] = [d[i], a[i], b[i], c[i]];
         }
     }
-    function rotateBorderConterClock(a: string[], b: string[], c: string[], d: string[], n: number[]) {
+
+    function rotateFrontBackLayer(a: string[], b: string[], c: string[], d: string[], n: number[]) {
         for (const i of n) {
-            [a[i], b[i], c[i], d[i]] = [b[i], c[i], d[i], a[i]];
+            [a[i], b[i], c[i], d[i]] = [d[rol(i, 3)], a[i], b[i], c[i]];
         }
     }
+
     
     // function swap(base: string[], go: string[], n: string) {
     //     let x = 0, y = 0, z = 0;
@@ -65,30 +101,31 @@
         const moves = algorithm.split(" ");
         for (const move of moves) {
             if (move == "R") {
+                rotateRightLeftLayer(colors.green, colors.white, colors.blue, colors.yellow, [2, 4, 7]);
                 rotateFace(colors.red);
-                rotateBorderClockWise(colors.green, colors.white, colors.blue, colors.yellow, [2, 4, 7]);
-                //for (let i = 0; i < 3; ++i) column("R'");
             } else if (move == "R'") {
+                rotateRightLeftLayer(colors.green, colors.yellow, colors.blue, colors.white, [2, 4, 7]);
                 for (let i = 0; i < 3; ++i) rotateFace(colors.red);
-                //column("R'");
             } else if (move == "L") {
                 rotateFace(colors.orange);
-                //column("L");
+                rotateRightLeftLayer(colors.green, colors.yellow, colors.blue, colors.white, [0, 3, 5]);
             } else if (move == "L'") {
                 for (let i = 0; i < 3; ++i) rotateFace(colors.orange);
-                //for (let i = 0; i < 3; ++i) column("L")
+                rotateRightLeftLayer(colors.green, colors.white, colors.blue, colors.yellow, [0, 3, 5]);
             } else if (move == "U") {
+                rotateTopButtonLayer(colors.green, colors.orange, colors.blue, colors.red, [0, 1, 2]);
                 rotateFace(colors.white);
-                //row("U");
+           
             } else if (move == "U'") {
+                rotateTopButtonLayer(colors.green, colors.red, colors.blue, colors.orange, [0, 1, 2]);
                 for (let i = 0; i < 3; ++i) rotateFace(colors.white);
-                //for (let i = 0; i < 3; ++i) row("U");
+      
             } else if (move == "D") {
+                rotateTopButtonLayer(colors.green, colors.red, colors.blue, colors.orange, [5, 6, 7]);
                 rotateFace(colors.yellow);
-                //for (let i = 0; i < 3; ++i) row("D");
             } else if (move == "D'") {
+                rotateTopButtonLayer(colors.green, colors.orange, colors.blue, colors.red, [5, 6, 7]);
                 for (let i = 0; i < 3; ++i) rotateFace(colors.yellow);
-                //row("D");
             }
         }
     }
@@ -100,7 +137,7 @@
     }
     original();
 
-    scramble("R");
+    scramble("D'");
 </script>
 
 <div class="contenidor">
