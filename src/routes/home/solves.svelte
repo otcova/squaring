@@ -6,15 +6,23 @@
     import { formatTime } from "./utils";
 
 
-    $: best = Math.min(...$solves.map(element => element.time));
-    $: worst =  Math.max(...$solves.map(element => element.time));
+    let best = 0;
+    let worst = 0;
     let media = 0;
     $: {
+        best = Math.min(...$solves.map(element => element.time));
+        worst =  Math.max(...$solves.map(element => element.time));
+
+        if (!Number.isFinite(best)) best = 0;
+        if (!Number.isFinite(worst)) worst = 0;
+
         let sum = 0;
         for (let i = 0; i < $solves.length; ++i) {
             sum += $solves[i].time;
         }
-        media = sum/$solves.length;
+        media = sum/$solves.length || 0;
+
+        console.log($solves);
     };
 
 </script>

@@ -8,7 +8,8 @@
     setInterval(() => {
         if (!Number.isFinite(time)) time = 0;
         let dist = time - smoothTime;
-        smoothTime += dist * 0.1;
+        if (Math.abs(dist) < 0.5) smoothTime = time;
+        else smoothTime += dist * 0.1;
     }, 50);
 
 </script>

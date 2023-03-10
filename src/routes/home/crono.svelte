@@ -38,7 +38,7 @@
 
     onMount(() => {
         setInterval(() => {
-            if (!isPaused) millis = Math.round(performance.now() - startTime);
+            if (!isPaused) millis = Math.trunc(performance.now() - startTime);
         }, 10);
 
         window.onkeydown = (event) => {
