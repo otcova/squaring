@@ -91,8 +91,8 @@
         padding: 10px;
         margin: 5px;
 
-        width: 30%;
-        height: 30%;
+        width: 550px;
+        height: 350px;
 
         border: 0px solid white;
         background: var(--panel);

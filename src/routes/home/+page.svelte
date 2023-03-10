@@ -8,17 +8,25 @@
    
 </script>
 
-
-<Scramble/>
-<div class="contenedor">
-    <h1 class="title">Cronometre</h1>
-    <Crono/>
-    <Solves/>
-    <CubDraw/>
-    <Console/>
-</div>
+<body>
+    <Scramble/>
+    <div class="contenedor">
+        <h1 class="title">Cronometre</h1>
+        <Crono/>
+        <Solves/>
+        <CubDraw/>
+        <Console/>
+    </div>
+</body>
 
 <style>
+
+    body {
+        background-position-x:center;
+		background-position-y:top;
+		background-image: url("fuente-de-luces_1920x1200_xtrafondos.com.jpg");
+    }
+
     .contenedor {
         display: flex;
         flex-direction: column;
