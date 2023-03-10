@@ -19,9 +19,11 @@
         yellow: [],
     };
 
-    function rotateFace(base: string[]) {
-        [base[0], base[2], base[5], base[7]] = [base[5], base[0], base[7], base[2]];
-        [base[1], base[3], base[4], base[6]] = [base[3], base[6], base[1], base[4]];
+    function rotateFace(base: string[], n: number) {
+        for (let i = 0; i < n; ++i) {
+            [base[0], base[2], base[5], base[7]] = [base[5], base[0], base[7], base[2]];
+            [base[1], base[3], base[4], base[6]] = [base[3], base[6], base[1], base[4]];
+        }
     }
 
     function invertion(i: number) {
@@ -41,14 +43,21 @@
         for (let i = 0; i < n; ++i) {
             switch (k) {
                 case 0: k = 2;
+                break;
                 case 1: k = 4;
+                break;
                 case 2: k = 7;
+                break;
                 case 3: k = 1;
-    
+                break;    
                 case 4: k = 6;
+                break;
                 case 5: k = 0; 
+                break;
                 case 6: k = 3; 
+                break;
                 case 7: k = 5; 
+                break;
             }
         }
         return k;
@@ -68,7 +77,7 @@
 
     function rotateFrontBackLayer(a: string[], b: string[], c: string[], d: string[], n: number[]) {
         for (const i of n) {
-            [a[i], b[i], c[i], d[i]] = [d[rol(i, 3)], a[i], b[i], c[i]];
+            [a[i], b[rol(i, 1)], c[rol(i, 2)], d[rol(i, 3)]] = [d[rol(i, 3)], a[i], b[rol(i, 1)], c[rol(i, 2)]];
         }
     }
 
@@ -102,30 +111,34 @@
         for (const move of moves) {
             if (move == "R") {
                 rotateRightLeftLayer(colors.green, colors.white, colors.blue, colors.yellow, [2, 4, 7]);
-                rotateFace(colors.red);
+                rotateFace(colors.red, 1);
             } else if (move == "R'") {
                 rotateRightLeftLayer(colors.green, colors.yellow, colors.blue, colors.white, [2, 4, 7]);
-                for (let i = 0; i < 3; ++i) rotateFace(colors.red);
+                rotateFace(colors.red, 3);
             } else if (move == "L") {
-                rotateFace(colors.orange);
+                rotateFace(colors.orange, 1);
                 rotateRightLeftLayer(colors.green, colors.yellow, colors.blue, colors.white, [0, 3, 5]);
             } else if (move == "L'") {
-                for (let i = 0; i < 3; ++i) rotateFace(colors.orange);
+                rotateFace(colors.orange, 3);
                 rotateRightLeftLayer(colors.green, colors.white, colors.blue, colors.yellow, [0, 3, 5]);
             } else if (move == "U") {
                 rotateTopButtonLayer(colors.green, colors.orange, colors.blue, colors.red, [0, 1, 2]);
-                rotateFace(colors.white);
-           
+                rotateFace(colors.white, 1);
             } else if (move == "U'") {
                 rotateTopButtonLayer(colors.green, colors.red, colors.blue, colors.orange, [0, 1, 2]);
-                for (let i = 0; i < 3; ++i) rotateFace(colors.white);
-      
+                rotateFace(colors.white, 3);
             } else if (move == "D") {
                 rotateTopButtonLayer(colors.green, colors.red, colors.blue, colors.orange, [5, 6, 7]);
-                rotateFace(colors.yellow);
+                rotateFace(colors.yellow, 1);
             } else if (move == "D'") {
                 rotateTopButtonLayer(colors.green, colors.orange, colors.blue, colors.red, [5, 6, 7]);
-                for (let i = 0; i < 3; ++i) rotateFace(colors.yellow);
+                rotateFace(colors.yellow, 3);
+            } else if (move == "F") {
+                rotateFrontBackLayer(colors.white, colors.red, colors.yellow, colors.orange, [5, 6, 7]);
+                rotateFace(colors.green, 1);
+            } else if (move == "F'") {
+                for (let i = 0; i < 3; ++i) rotateFrontBackLayer(colors.white, colors.red, colors.yellow, colors.orange, [5, 6, 7]);
+                rotateFace(colors.green, 3);
             }
         }
     }
@@ -137,7 +150,7 @@
     }
     original();
 
-    scramble("D'");
+    scramble("R U R' U' R' F R R U' R' U' R U R' F'");
 </script>
 
 <div class="contenidor">
