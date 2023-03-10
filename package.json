@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "vite dev --open",
+		"dev": "vite dev --open --host",
 		"upload": "vite build && gh-pages --dotfiles -d build",
 		"build": "vite build",
 		"preview": "vite preview --open",
