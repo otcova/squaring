@@ -83,7 +83,9 @@
       
         text-align: center;
         border-radius: 10px;
+        background: #000c;
         border: 3px solid white;
+        color: white;
     }
 
     .keypress {
