@@ -1,4 +1,5 @@
 <script lang="ts">
-    import { browser } from "$app/environment";
-    if (browser) window.location.replace("home");
+    import Home from "./home/+page.svelte";
 </script>
+
+<Home/>

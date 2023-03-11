@@ -2,20 +2,15 @@
     import Navbar from "./navbar.svelte";
 </script>
 
-<Navbar />
-
-<div class="content">
+<div class="main">
+    <Navbar />
     <slot />
 </div>
 
 <style>
-    .content {
+    .main {
         display: flex;
         flex-direction: column;
-        gap: 20px;
-
-        box-sizing: border-box;
-        height: 100%;
-        
+        min-height: 100vh;
     }
 </style>
