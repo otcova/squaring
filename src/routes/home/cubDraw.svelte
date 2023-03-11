@@ -407,7 +407,7 @@ STOP!!!!
         <div class="border_top {colors.white[1]}" />
         <div class="pixel {colors.white[2]}" />
         <div class="border_left {colors.white[3]}" />
-        <div class="center {colors.white[4]}"></div>
+        <div class="center white"></div>
         <div class="border_right {colors.white[5]}" />
         <div class="pixel {colors.white[6]}" />
         <div class="border_buttom {colors.white[7]}" />
@@ -533,8 +533,13 @@ STOP!!!!
         border-top-left-radius: 7px;
     }
 
+    .center.white {
+        background: url("gan_icon.png");
+        background-size: cover;
+    }
+
     .yellow {
-        background: #ffff00;
+        background: #ff0;
     }
     .red {
         background: red;
