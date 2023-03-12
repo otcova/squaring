@@ -396,6 +396,8 @@ STOP!!!!
             left: Array(9).fill("orange"),
         };
     }
+
+
     original();
     scramble("F2 U2 F L F R D' U2 B U2 B2 F2 L2 D F2 R' U2 F2 R2 D B' U2 F2 D F D' U2 L' D R'");
 </script>

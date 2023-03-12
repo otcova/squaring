@@ -2,6 +2,11 @@
     import { element } from "svelte/internal";
     import { solves } from "./solves";
 
+    let llist: string[] = ["R", "L"];
+    
+    function randomScramble() {
+    }
+
     function last() {
         console.log("h");
     }
