@@ -17,27 +17,22 @@
 </script>
 
 <div class="contenedor">
-
-    <div class="scramble">
-    </div>
+    <div class="scramble">R U R' U' M2 R U L</div>
 
     <div class="button">
         <button class="last" on:click={last}>Last</button>
-        <button class="next" on:click={next} >Next</button>
+        <button class="next" on:click={next}>Next</button>
     </div>
 </div>
 
 <style>
-    .contenedor{
+    .contenedor {
         display: flex;
         align-items: center;
         justify-content: center;
 
-        font-size: 20px;
-        position: relative;
         box-sizing: border-box;
-        margin-top: 50px;
-        
+        position: relative;
         width: 100%;
         height: 75px;
 
@@ -45,19 +40,24 @@
         box-shadow: 0 0 2px 2px #0007;
     }
 
+    .scramble {
+        font-size: 20px;
+        flex-grow: 1;
+        text-align: center;
+    }
+
     .button {
         position: absolute;
-        box-sizing: border-box;
-        bottom: 10px;
-        right: 200px;
+        right: 100px;
     }
 
     button {
+        cursor: pointer;
         box-sizing: border-box;
         align-items: center;
         justify-content: center;
         padding: 2px 30px;
-        
+
         font-size: 15px;
         height: 100%;
         outline: none;
@@ -77,3 +77,4 @@
         background: black;
     }
 </style>
+

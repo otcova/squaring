@@ -1,47 +1,40 @@
-<script lang = "ts">
+<script lang="ts">
     import Console from "./console.svelte";
     import Crono from "./crono.svelte";
     import Solves from "./solves.svelte";
     import Scramble from "./scramble.svelte";
     import CubDraw from "./cubDraw.svelte";
-
-   
 </script>
 
-<body>
-    <Scramble/>
-    <div class="contenedor">
-        <h1 class="title">Cronometre</h1>
-        <Crono/>
-        <Solves/>
-        <CubDraw/>
-        <Console/>
+<div class="page">
+    <Scramble />
+    <div class="content">
+        <h1>Cronometre</h1>
+        <Solves />
+        <Crono />
+        <CubDraw />
+        <Console />
     </div>
-</body>
+</div>
 
 <style>
-
-    body {
-        background-position-x:center;
-		background-position-y:top;
-		background-image: url("fuente-de-luces_1920x1200_xtrafondos.com.jpg");
-    }
-
-    .contenedor {
+    .page {
         display: flex;
         flex-direction: column;
-        gap: 20px;
-        box-sizing: border-box;
-        height: 100%; 
-        padding: 0 30px;
+
+        background-position-x: center;
+        background-position-y: top;
+        background-image: url($lib/fuente-de-luces_1920x1200_xtrafondos.com.jpg);
+        flex-grow: 1;
     }
 
-    .title {
-        font-size: 50px;
-        color: white;
-        margin-bottom: 20px;
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: center;
+
+        padding: 0 60px;
+        flex-grow: 1;
     }
 </style>
-
-
-

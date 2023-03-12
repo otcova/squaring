@@ -28,7 +28,7 @@
 </script>
 
 
-<form class = "contenedor">
+<div class = "contenedor">
     <h2 class="title">Solves</h2>
 
     <div class="records">
@@ -55,7 +55,7 @@
         {/each}
     </div>
 
-</form>
+</div>
 
 <style>
     .contenedor{
