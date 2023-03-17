@@ -5,7 +5,7 @@
 </script>
 
 <div class="contenedor">
-    <div class="scramble">{$scramble}</div>
+    <div class="scramble">{$scramble.replaceAll(" ", "  ")}</div>
 
     <div class="button">
         <button class="last" on:click={lastScramble} on:keydown|preventDefault>Last</button>
@@ -29,13 +29,15 @@
     }
 
     .scramble {
-        font-size: 20px;
+        white-space: pre;
+        font-size: 33px;
         flex-grow: 1;
         text-align: center;
     }
 
     .button {
         position: absolute;
+        bottom: 5px;
         right: 100px;
     }
 
@@ -48,7 +50,7 @@
 
         font-size: 15px;
         height: 100%;
-        --outline: none;
+        outline: none;
         border: black;
         border-radius: 10px;
         background: white;

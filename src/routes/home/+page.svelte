@@ -9,7 +9,7 @@
 <div class="page">
     <Scramble />
     <div class="content">
-        <h1>Cronometre</h1>
+        <!-- <h1>Cronometre</h1> -->
         {#if true}
             <Solves />
         {/if}

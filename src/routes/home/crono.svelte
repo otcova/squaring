@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
 import { nextScramble } from "./scramble";
-import { formatTime } from "./utils";
+import { formatTime } from "../../lib/utils";
     import { scramble } from "./scramble";
     import { solves } from "$lib/solves";
     

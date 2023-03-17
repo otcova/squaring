@@ -1,11 +1,11 @@
 <script lang="ts">
     import { element } from "svelte/internal";
     import Crono from "./crono.svelte";
-    import { solves } from "$lib/solves";
+    import { solves, type Solve } from "$lib/solves";
     import TimeAnimation from "./time_animation.svelte";
-    import { formatTime } from "./utils";
-
-
+    import { formatTime } from "../../lib/utils";
+    import { scramble } from "./scramble";
+    
     let best = 0;
     let worst = 0;
     let media = 0;
@@ -22,6 +22,10 @@
         }
         media = sum/$solves.length || 0;
     };
+
+    function showScramble(solve: Solve) {
+        $scramble = solve.scramble;
+    }
 
 </script>
 
@@ -46,7 +50,7 @@
 
     <div class="solves">
         {#each $solves as element, index}
-            <div class = "solve"> 
+            <div class = "solve" on:click={() => showScramble(element)}> 
                 <div class="label">{index}</div>
                 <div class="time">{formatTime(element.time)}</div>
             </div>
@@ -64,7 +68,7 @@
         flex-direction: column;
         border-radius: 10px;
         width: 20%;
-        height: 600px;
+        height: 700px;
     }
 
     .records {
@@ -116,7 +120,8 @@
         box-sizing: border-box;
 
         width: 100%;
-        height: 30px;
+        font-size: 20px;
+        padding: 10px 0;
         margin-bottom: 5px;
         border: 2px solid white;
         border-radius: 10px;
@@ -125,11 +130,9 @@
     .label {
         display: flex;
         box-sizing: border-box;
-
         align-items: center;
         justify-content: center;
         
-        padding: 10px;
         border-radius: 10px;
 
         height: 100%;
@@ -137,16 +140,14 @@
     }
 
     .time {
-        height: 100%;
-        width: 60%;
-        padding: 10px;
-
-
         display: flex;
         box-sizing: border-box;
         align-items: center;
         justify-content: center;
+        
+        border-radius: 10px;
 
-        color: white;
+        height: 100%;
+        width: 60%;
     }
 </style>

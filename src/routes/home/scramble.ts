@@ -11,7 +11,7 @@ function randomScramble(size: number) {
         "L",
     ];
 
-    const scramble = [];
+    const scramble: string[]= [];
     for (let i = 0; i < size; ++i) {
         let last = scramble[scramble.length - 1];
         let move = last;

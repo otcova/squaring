@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { formatTime } from "./utils";
+    import { formatTime } from "../../lib/utils";
 
     export let time = 0;
 

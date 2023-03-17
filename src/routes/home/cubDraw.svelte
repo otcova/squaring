@@ -25,7 +25,7 @@
 
     $: {
         for (const faceName in cub) {
-            const face = cub[faceName as keyof Cub];
+            const face = cub[faceName as keyof Cub] as string[];
             colors[face[4] as keyof Colors] = face;
         }
         colors = colors;
