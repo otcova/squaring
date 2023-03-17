@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Console from "./console.svelte";
+    import Console from "$lib/console.svelte";
     import Crono from "./crono.svelte";
     import Solves from "./solves.svelte";
     import Scramble from "./scramble.svelte";
@@ -24,6 +24,7 @@
 
         background-position-x: center;
         background-position-y: top;
+        background-size: cover;
         background-image: url($lib/fuente-de-luces_1920x1200_xtrafondos.com.jpg);
         flex-grow: 1;
     }

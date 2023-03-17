@@ -1,7 +1,7 @@
 <script lang="ts">
     import { element } from "svelte/internal";
     import Crono from "./crono.svelte";
-    import { solves } from "./solves";
+    import { solves } from "$lib/solves";
     import TimeAnimation from "./time_animation.svelte";
     import { formatTime } from "./utils";
 

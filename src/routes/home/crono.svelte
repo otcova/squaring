@@ -1,6 +1,9 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { solves } from "./solves";
+import { nextScramble } from "./scramble";
+    import { scramble } from "./scramble";
+    import { solves } from "$lib/solves";
+    
 
     let millis = 0;
     $: segons = Math.trunc(millis / 1000);
@@ -29,6 +32,7 @@
         };
 
         $solves = [...$solves, solve];
+        nextScramble();
     }
 
     function reset() {
@@ -87,6 +91,7 @@
         border: 3px solid white;
         color: white;
     }
+    
 
     .keypress {
         font-size: 250px;

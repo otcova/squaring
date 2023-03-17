@@ -1,27 +1,15 @@
 <script lang="ts">
-    import { element } from "svelte/internal";
-    import { solves } from "./solves";
-
-    let llist: string[] = ["R", "L"];
-    
-    function randomScramble() {
-    }
-
-    function last() {
-        console.log("h");
-    }
-
-    function next() {
-        console.log("h");
-    }
+    import { scramble } from "./scramble";
+    import { lastScramble } from "./scramble";
+    import { nextScramble } from "./scramble";
 </script>
 
 <div class="contenedor">
-    <div class="scramble">R U R' U' M2 R U L</div>
+    <div class="scramble">{$scramble}</div>
 
     <div class="button">
-        <button class="last" on:click={last}>Last</button>
-        <button class="next" on:click={next}>Next</button>
+        <button class="last" on:click={lastScramble} on:keydown|preventDefault>Last</button>
+        <button class="next" on:click={nextScramble} on:keydown|preventDefault>Next</button>
     </div>
 </div>
 
@@ -60,7 +48,7 @@
 
         font-size: 15px;
         height: 100%;
-        outline: none;
+        --outline: none;
         border: black;
         border-radius: 10px;
         background: white;
@@ -77,4 +65,3 @@
         background: black;
     }
 </style>
-
