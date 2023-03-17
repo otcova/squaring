@@ -1,21 +1,16 @@
 <script lang="ts">
     import { onMount } from "svelte";
 import { nextScramble } from "./scramble";
+import { formatTime } from "./utils";
     import { scramble } from "./scramble";
     import { solves } from "$lib/solves";
     
 
     let millis = 0;
-    $: segons = Math.trunc(millis / 1000) % 60;
-    $: minuts = Math.trunc(millis / 1000 / 60);
 
     let startTime = performance.now();
     let isPaused = true;
     let keypress = false;
-
-    $: millisStr = (millis % 1000).toString().padStart(3, "0");
-    $: segonsStr = segons.toString().padStart(2, "0");
-    $: minutsStr = minuts.toString().padStart(2, "0");
 
     function start() {
         isPaused = false;
@@ -61,7 +56,7 @@ import { nextScramble } from "./scramble";
 </script>
 
 <h1 class="crono" class:keypress>
-    {minutsStr}:{segonsStr}:{millisStr}
+    {formatTime(millis)}
 </h1>
 
 <style>
