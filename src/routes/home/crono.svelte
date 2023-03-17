@@ -6,7 +6,7 @@ import { nextScramble } from "./scramble";
     
 
     let millis = 0;
-    $: segons = Math.trunc(millis / 1000);
+    $: segons = Math.trunc(millis / 1000) % 60;
     $: minuts = Math.trunc(millis / 1000 / 60);
 
     let startTime = performance.now();
@@ -23,6 +23,7 @@ import { nextScramble } from "./scramble";
     }
 
     function stop() {
+        millis = Math.trunc(performance.now() - startTime);
         isPaused = true;
         const solve = {
             time: millis,
