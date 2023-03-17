@@ -21,8 +21,6 @@
             sum += $solves[i].time;
         }
         media = sum/$solves.length || 0;
-
-        console.log($solves);
     };
 
 </script>

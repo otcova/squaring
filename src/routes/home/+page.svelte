@@ -10,9 +10,13 @@
     <Scramble />
     <div class="content">
         <h1>Cronometre</h1>
-        <Solves />
+        {#if true}
+            <Solves />
+        {/if}
         <Crono />
-        <CubDraw />
+        {#if true}
+            <CubDraw />
+        {/if}
         <Console />
     </div>
 </div>

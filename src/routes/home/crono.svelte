@@ -26,7 +26,7 @@ import { nextScramble } from "./scramble";
         isPaused = true;
         const solve = {
             time: millis,
-            scramble: "",
+            scramble: $scramble,
             date: Date.now(),
             hide: false,
         };
