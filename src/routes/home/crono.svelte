@@ -59,15 +59,12 @@ import { nextScramble } from "./scramble";
     });
 </script>
 
-<div class="container">
-    <h1 class="crono" class:keypress>
-        {minutsStr}:{segonsStr}:{millisStr}
-    </h1>
-</div>
+<h1 class="crono" class:keypress>
+    {minutsStr}:{segonsStr}:{millisStr}
+</h1>
 
 <style>
-
-    .container {
+    .crono {
         position: absolute;
         top: 10%;
 
@@ -76,14 +73,13 @@ import { nextScramble } from "./scramble";
         align-items: center;
         align-self: center;
         text-align: center;
-    }
 
-    .crono {
         transition: all 1000ms;
         font-family: 'VT323', monospace;
         box-sizing: border-box;
-        padding: 0px 10px;
         font-size: 200px;
+        width: 800px;
+        height: 250px;
       
         text-align: center;
         border-radius: 10px;
@@ -94,6 +90,8 @@ import { nextScramble } from "./scramble";
     
 
     .keypress {
+        width: 1000px;
+        height: 300px;
         font-size: 250px;
         box-sizing: border-box;
         color: cyan;
