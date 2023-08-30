@@ -50,7 +50,8 @@
 
     <div class="solves">
         {#each $solves as element, index}
-            <div class = "solve" on:click={() => showScramble(element)}> 
+            <div class = "solve" 
+            }> 
                 <div class="label">{index}</div>
                 <div class="time">{formatTime(element.time)}</div>
             </div>
