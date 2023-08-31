@@ -333,6 +333,16 @@
         <div class="pixel {colors.white[80]}" on:click={()=>changeColor(80)} />
     </div>
     <div class="input">
+        <div class="colors">
+            <input type="button" class="button" value="WHITE ">
+            <input type="button" class="button" value="BLUE  ">
+            <input type="button" class="button" value="RED   ">
+            <input type="button" class="button" value="GREEN ">
+            <input type="button" class="button" value="ORANGE">
+            <input type="button" class="button" value="YELLOW">
+        </div>
+
+
         <input type="button" class="button" value="CREATE SET" on:click={createfullSet} />
         <input type="button" class="button" value="RANDOM SET" on:click={randomSet} />
         <input type="button" class="button" value="RESET" on:click={reset} />
@@ -348,13 +358,30 @@
         margin-right: 0;
     }
 
+    .color.button 
+    {
+        margin: 10px;
+    }
+    .colors
+    {
+        display: grid;
+        grid-template-rows: 50fr 50fr;
+        grid-template-columns: 50fr 50fr 50fr;
+        box-sizing: border-box;
+        position: fixed;
+        bottom: 200px;
+        right: 200px;
+    }
     .input {
         display: block;
         box-sizing: border-box;
         position: fixed;
+   
         bottom: 100px;
         right: 200px;
     }
+
+
     .button {
         display: inline-block;
         outline: none;
