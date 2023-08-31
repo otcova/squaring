@@ -172,165 +172,26 @@
     const list_set : Set[] = [set1, set2];
 
     //////////////////////////////////////////////////
+    
+    const PIXELS_STYLE = [
+        "", ...Array(7).fill("border_top"), "",
+        "border_left", ...Array(7).fill(""), "border_rigth",
+        "border_left", ...Array(7).fill(""), "border_rigth",
+        "border_left", ...Array(7).fill(""), "border_rigth",
+        "border_left", "", "", "", "center", "", "", "", "border_rigth",
+        "border_left", ...Array(7).fill(""), "border_rigth",
+        "border_left", ...Array(7).fill(""), "border_rigth",
+        "border_left", ...Array(7).fill(""), "border_rigth",
+        "", ...Array(7).fill("border_top"), "",
+    ];
+    
 </script>
 
 <div class="contenidor">
     <div class="face">
-        <div class="pixel {colors.white[0]}" on:click={()=>changeColor(0)} />
-        <div class="pixel border_top {colors.white[1]}" on:click={()=>changeColor(1)} />
-        <div class="pixel border_top {colors.white[2]}" on:click={()=>changeColor(2)} />
-        <div class="pixel border_top {colors.white[3]}" on:click={()=>changeColor(3)} />
-        <div class="pixel border_top {colors.white[4]}" on:click={()=>changeColor(4)} />
-        <div class="pixel border_top {colors.white[5]}" on:click={()=>changeColor(5)} />
-        <div class="pixel border_top {colors.white[6]}" on:click={()=>changeColor(6)} />
-        <div
-            class="pixel border_top {colors.white[7]}"
-            on:click={()=>changeColor(7)}
-        />
-        <div class="pixel {colors.white[8]}" on:click={()=>changeColor(8)} />
-
-        <div
-            class="pixel border_left {colors.white[9]}"
-            on:click={()=>changeColor(9)}
-        />
-        <div class="pixel {colors.white[10]}" on:click={()=>changeColor(10)} />
-        <div class="pixel {colors.white[11]}" on:click={()=>changeColor(11)} />
-        <div class="pixel {colors.white[12]}" on:click={()=>changeColor(12)} />
-        <div class="pixel {colors.white[13]}" on:click={()=>changeColor(13)} />
-        <div class="pixel {colors.white[14]}" on:click={()=>changeColor(14)} />
-        <div class="pixel {colors.white[15]}" on:click={()=>changeColor(15)} />
-        <div class="pixel {colors.white[16]}" on:click={()=>changeColor(16)} />
-        <div
-            class="pixel border_right {colors.white[17]}"
-            on:click={()=>changeColor(17)}
-        />
-
-        <div
-            class="pixel border_left {colors.white[18]}"
-            on:click={()=>changeColor(18)}
-        />
-        <div class="pixel {colors.white[19]}" on:click={()=>changeColor(19)} />
-        <div class="pixel {colors.white[20]}" on:click={()=>changeColor(20)} />
-        <div class="pixel {colors.white[21]}" on:click={()=>changeColor(21)} />
-        <div class="pixel {colors.white[22]}" on:click={()=>changeColor(22)} />
-        <div class="pixel {colors.white[23]}" on:click={()=>changeColor(23)} />
-        <div class="pixel {colors.white[24]}" on:click={()=>changeColor(24)} />
-        <div class="pixel {colors.white[25]}" on:click={()=>changeColor(25)} />
-        <div
-            class="pixel border_right {colors.white[26]}"
-            on:click={()=>changeColor(26)}
-        />
-
-        <div
-            class="pixel border_left {colors.white[27]}"
-            on:click={()=>changeColor(27)}
-        />
-        <div class="pixel {colors.white[28]}" on:click={()=>changeColor(28)} />
-        <div class="pixel {colors.white[29]}" on:click={()=>changeColor(29)} />
-        <div class="pixel {colors.white[30]}" on:click={()=>changeColor(30)} />
-        <div class="pixel {colors.white[31]}" on:click={()=>changeColor(31)} />
-        <div class="pixel {colors.white[32]}" on:click={()=>changeColor(32)} />
-        <div class="pixel {colors.white[33]}" on:click={()=>changeColor(33)} />
-        <div class="pixel {colors.white[34]}" on:click={()=>changeColor(34)} />
-        <div
-            class="pixel border_right {colors.white[35]}"
-            on:click={()=>changeColor(35)}
-        />
-
-        <div
-            class="pixel border_left {colors.white[36]}"
-            on:click={()=>changeColor(36)}
-        />
-        <div class="pixel {colors.white[37]}" on:click={()=>changeColor(37)} />
-        <div class="pixel {colors.white[38]}" on:click={()=>changeColor(38)} />
-        <div class="pixel {colors.white[39]}" on:click={()=>changeColor(39)} />
-        <div class="center {colors.white[40]}" on:click={()=>changeColor(40)} />
-        <div class="pixel {colors.white[41]}" on:click={()=>changeColor(41)} />
-        <div class="pixel {colors.white[42]}" on:click={()=>changeColor(42)} />
-        <div class="pixel {colors.white[43]}" on:click={()=>changeColor(43)} />
-        <div
-            class="pixel border_right {colors.white[44]}"
-            on:click={()=>changeColor(44)}
-        />
-
-        <div
-            class="pixel border_left {colors.white[45]}"
-            on:click={()=>changeColor(45)}
-        />
-        <div class="pixel {colors.white[46]}" on:click={()=>changeColor(46)} />
-        <div class="pixel {colors.white[47]}" on:click={()=>changeColor(47)} />
-        <div class="pixel {colors.white[48]}" on:click={()=>changeColor(48)} />
-        <div class="pixel {colors.white[49]}" on:click={()=>changeColor(49)} />
-        <div class="pixel {colors.white[50]}" on:click={()=>changeColor(50)} />
-        <div class="pixel {colors.white[51]}" on:click={()=>changeColor(51)} />
-        <div class="pixel {colors.white[52]}" on:click={()=>changeColor(52)} />
-        <div
-            class="pixel border_right {colors.white[53]}"
-            on:click={()=>changeColor(53)}
-        />
-
-        <div
-            class="pixel border_left {colors.white[54]}"
-            on:click={()=>changeColor(54)}
-        />
-        <div class="pixel {colors.white[55]}" on:click={()=>changeColor(55)} />
-        <div class="pixel {colors.white[56]}" on:click={()=>changeColor(56)} />
-        <div class="pixel {colors.white[57]}" on:click={()=>changeColor(57)} />
-        <div class="pixel {colors.white[58]}" on:click={()=>changeColor(58)} />
-        <div class="pixel {colors.white[59]}" on:click={()=>changeColor(59)} />
-        <div class="pixel {colors.white[60]}" on:click={()=>changeColor(60)} />
-        <div class="pixel {colors.white[61]}" on:click={()=>changeColor(61)} />
-        <div
-            class="pixel border_right {colors.white[62]}"
-            on:click={()=>changeColor(62)}
-        />
-
-        <div
-            class="pixel border_left {colors.white[63]}"
-            on:click={()=>changeColor(63)}
-        />
-        <div class="pixel {colors.white[64]}" on:click={()=>changeColor(64)} />
-        <div class="pixel {colors.white[65]}" on:click={()=>changeColor(65)} />
-        <div class="pixel {colors.white[66]}" on:click={()=>changeColor(66)} />
-        <div class="pixel {colors.white[67]}" on:click={()=>changeColor(67)} />
-        <div class="pixel {colors.white[68]}" on:click={()=>changeColor(68)} />
-        <div class="pixel {colors.white[69]}" on:click={()=>changeColor(69)} />
-        <div class="pixel {colors.white[70]}" on:click={()=>changeColor(70)} />
-        <div
-            class="pixel border_right {colors.white[71]}"
-            on:click={()=>changeColor(71)}
-        />
-
-        <div class="pixel {colors.white[72]}" on:click={()=>changeColor(72)} />
-        <div
-            class="pixel border_buttom {colors.white[73]}"
-            on:click={()=>changeColor(73)}
-        />
-        <div
-            class="pixel border_buttom {colors.white[74]}"
-            on:click={()=>changeColor(74)}
-        />
-        <div
-            class="pixel border_buttom {colors.white[75]}"
-            on:click={()=>changeColor(75)}
-        />
-        <div
-            class="pixel border_buttom {colors.white[76]}"
-            on:click={()=>changeColor(76)}
-        />
-        <div
-            class="pixel border_buttom {colors.white[77]}"
-            on:click={()=>changeColor(77)}
-        />
-        <div
-            class="pixel border_buttom {colors.white[78]}"
-            on:click={()=>changeColor(78)}
-        />
-        <div
-            class="pixel border_buttom {colors.white[79]}"
-            on:click={()=>changeColor(79)}
-        />
-        <div class="pixel {colors.white[80]}" on:click={()=>changeColor(80)} />
+        {#each PIXELS_STYLE as style, i}
+            <div class="pixel {style} {colors.white[i]}" on:click={()=>changeColor(i)} />
+        {/each}
     </div>
     <div class="input">
         <input type="button" class="button" value="CREATE SET" on:click={createfullSet} />
