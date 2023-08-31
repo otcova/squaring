@@ -2,6 +2,7 @@
     import { each } from "svelte/internal";
 
     const NumberofPixels = 89;
+    let PaintingColor = 0;
 
     const ColorsList: string[] = [
         "white",
@@ -140,9 +141,9 @@
     }
 
     //$: {}
-
+    ////////////////////////////////////////////////////////////////////////
     function changeColor(pos: number) {
-        colors.white[pos] = ColorsList[colorNumber(colors.white[pos]) + 1];
+        colors.white[pos] = ColorsList[PaintingColor];
     }
 
     /////////////////////////////////////////////////////
@@ -159,7 +160,9 @@
     };
     const list_set: Set[] = [set1, set2];
 
-    //////////////////////////////////////////////////
+    function change_paitingColor(color: number) {
+        PaintingColor = color;
+    }
 
     const PIXELS_STYLE = Array.from(
         "ptttttttp lpppppppr lpppppppr lpppppppr lpppcpppr lpppppppr lpppppppr lpppppppr pbbbbbbbp"
@@ -173,6 +176,8 @@
             if (c == "c") return "center";
         })
         .filter((v) => v);
+
+    const COLORS = ["white", "blue", "red", "green", "orange", "yellow"];
 </script>
 
 <div class="contenidor">
@@ -186,12 +191,44 @@
     </div>
     <div class="input">
         <div class="colors">
-            <input type="button" class="button" value="WHITE " />
-            <input type="button" class="button" value="BLUE  " />
-            <input type="button" class="button" value="RED   " />
-            <input type="button" class="button" value="GREEN " />
-            <input type="button" class="button" value="ORANGE" />
-            <input type="button" class="button" value="YELLOW" />
+            {#each COLORS as color, i}
+                <input
+                    type="button"
+                    class="button {color}"
+                    value="   "
+                    on:click={() => change_paitingColor(i)}
+                />
+                <input
+                    type="button"
+                    class="button {color}"
+                    value="   "
+                    on:click={() => change_paitingColor(i)}
+                />
+                <input
+                    type="button"
+                    class="button {color}"
+                    value="   "
+                    on:click={() => change_paitingColor(i)}
+                />
+                <input
+                    type="button"
+                    class="button {color}"
+                    value="   "
+                    on:click={() => change_paitingColor(i)}
+                />
+                <input
+                    type="button"
+                    class="button {color}"
+                    value="   "
+                    on:click={() => change_paitingColor(i)}
+                />
+                <input
+                    type="button"
+                    class="button {color}"
+                    value="   "
+                    on:click={() => change_paitingColor(i)}
+                />
+            {/each}
         </div>
 
         <input
@@ -224,10 +261,16 @@
     }
     .colors {
         display: grid;
-        grid-template-rows: 50fr 50fr;
-        grid-template-columns: 50fr 50fr 50fr;
         box-sizing: border-box;
         position: fixed;
+        grid-template-rows: 50fr 50fr;
+        grid-template-columns: 50fr 50fr 50fr;
+
+        background-color: #3c4fc0;
+        border-radius: 6px;
+        padding: 8px;
+        gap: 5px;
+
         bottom: 200px;
         right: 200px;
     }
