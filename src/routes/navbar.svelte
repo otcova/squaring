@@ -6,7 +6,9 @@
 <div class="navbar">
     <a class="link" href="{base}/">Home</a>
     <a class="link" href="{base}/records">Records</a>
+    <a class="link" href="{base}/pixel_art">Pixel Art</a>
     <a class="link" href="{base}/example">Example</a>
+
 </div>
 
 <style>
