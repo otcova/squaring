@@ -198,36 +198,6 @@
                     value="   "
                     on:click={() => change_paitingColor(i)}
                 />
-                <input
-                    type="button"
-                    class="button {color}"
-                    value="   "
-                    on:click={() => change_paitingColor(i)}
-                />
-                <input
-                    type="button"
-                    class="button {color}"
-                    value="   "
-                    on:click={() => change_paitingColor(i)}
-                />
-                <input
-                    type="button"
-                    class="button {color}"
-                    value="   "
-                    on:click={() => change_paitingColor(i)}
-                />
-                <input
-                    type="button"
-                    class="button {color}"
-                    value="   "
-                    on:click={() => change_paitingColor(i)}
-                />
-                <input
-                    type="button"
-                    class="button {color}"
-                    value="   "
-                    on:click={() => change_paitingColor(i)}
-                />
             {/each}
         </div>
 
