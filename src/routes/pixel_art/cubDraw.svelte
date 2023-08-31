@@ -26,10 +26,10 @@
         colors: string[];
     }
 
-    let set: Set = {
+    let set: Set[] = [{
         pos: [],
         colors: [],
-    }
+    }]
 
 
     let colors: Colors = {
@@ -122,11 +122,18 @@
     }
 
     /////////////////////////////////////////////////////
-    function createSet()
+    function createSet(set : Set)
     {
-        Pos.forEach(element => {
-            let color: string = restictionColor(ChooseColros);
+        set.pos.forEach(element => {
+            let color: string = restictionColor(set.colors);
             colors.white[element] = color;
+        });
+    }
+
+    function createfullSet()
+    {
+        list_set.forEach(element => {
+            createSet(element);
         });
     }
 
@@ -393,12 +400,19 @@
     //
 
     /////////////////////////////////////////////////////
-    let sets : Set[]; 
     const lefteye = make_number_rectangle(get_number(2, 2), get_number(3, 3));
     const righteye = make_number_rectangle(get_number(2, 5), get_number(3, 6));
 
-    const Pos = make_arrayOfarray([lefteye, righteye]);
-    const ChooseColros = ["blue", "red"];
+    let set1 : Set = {
+        pos : make_arrayOfarray([lefteye, righteye]),
+        colors : ["blue", "red"],
+    }
+    let set2 : Set = {
+        pos : make_arrayOfarray([make_number_line([5])]),
+        colors : ["green", "yellow"],
+    }
+    const list_set : Set[] = [set1, set2];
+
     //////////////////////////////////////////////////
 </script>
 
