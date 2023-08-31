@@ -1,7 +1,7 @@
 <script lang="ts">
     import { each } from "svelte/internal";
 
-    const NumberofPixels = 89; 
+    const NumberofPixels = 89;
 
     const ColorsList: string[] = [
         "white",
@@ -26,11 +26,12 @@
         colors: string[];
     }
 
-    let set: Set[] = [{
-        pos: [],
-        colors: [],
-    }]
-
+    let set: Set[] = [
+        {
+            pos: [],
+            colors: [],
+        },
+    ];
 
     let colors: Colors = {
         white: [],
@@ -58,81 +59,68 @@
         return ColorsList[i];
     }
 
-    function restictionColor(choose_colors : string[]) {
+    function restictionColor(choose_colors: string[]) {
         let i: number = Math.round(Math.random()) % choose_colors.length;
         return choose_colors[i];
     }
 
-    function get_number(i : number, j : number)
-    {
-        return i*9 + j;
+    function get_number(i: number, j: number) {
+        return i * 9 + j;
     }
 
-    function make_number_array(begin : number, end : number)
-    {
+    function make_number_array(begin: number, end: number) {
         let list = [];
-        for (let i = begin; i <= end; ++i)
-            list.push(i);
+        for (let i = begin; i <= end; ++i) list.push(i);
         return list;
     }
 
-    function make_arrayOfarray(listoflist : number[][])
-    {
-        let list : number[] = [];
-        listoflist.forEach(array => {
-            array.forEach(element => {
+    function make_arrayOfarray(listoflist: number[][]) {
+        let list: number[] = [];
+        listoflist.forEach((array) => {
+            array.forEach((element) => {
                 list.push(element);
             });
         });
         return list;
     }
 
-    function make_number_line(list_number : number[])
-    {
-        let list : number[] = [];
-        list_number.forEach(element => {
-            for (let i = 0; i < 9; ++i)
-                list.push(element*9 + i);
+    function make_number_line(list_number: number[]) {
+        let list: number[] = [];
+        list_number.forEach((element) => {
+            for (let i = 0; i < 9; ++i) list.push(element * 9 + i);
         });
         return list;
     }
 
-    function make_number_column(list_number : number[])
-    {
-        let list : number[] = [];
-        list_number.forEach(element => {
-            for (let i = 0; i < 9; ++i)
-                list.push(element + i*9);
+    function make_number_column(list_number: number[]) {
+        let list: number[] = [];
+        list_number.forEach((element) => {
+            for (let i = 0; i < 9; ++i) list.push(element + i * 9);
         });
         return list;
     }
 
-    function make_number_rectangle(begin : number, end : number)
-    {
+    function make_number_rectangle(begin: number, end: number) {
         let list = [];
-        let width = Math.abs(end%9 - begin%9);
-        let height = Math.abs(Math.round(end/9) - Math.round(begin/9));
+        let width = Math.abs((end % 9) - (begin % 9));
+        let height = Math.abs(Math.round(end / 9) - Math.round(begin / 9));
         console.log(height);
-        for (let i = 0; i < height + 1; ++i)
-        {
-            for(let j = 0; j < width + 1; ++j)
-                list.push(begin+9*i + j);
+        for (let i = 0; i < height + 1; ++i) {
+            for (let j = 0; j < width + 1; ++j) list.push(begin + 9 * i + j);
         }
         return list;
     }
 
     /////////////////////////////////////////////////////
-    function createSet(set : Set)
-    {
-        set.pos.forEach(element => {
+    function createSet(set: Set) {
+        set.pos.forEach((element) => {
             let color: string = restictionColor(set.colors);
             colors.white[element] = color;
         });
     }
 
-    function createfullSet()
-    {
-        list_set.forEach(element => {
+    function createfullSet() {
+        list_set.forEach((element) => {
             createSet(element);
         });
     }
@@ -161,51 +149,63 @@
     const lefteye = make_number_rectangle(get_number(2, 2), get_number(3, 3));
     const righteye = make_number_rectangle(get_number(2, 5), get_number(3, 6));
 
-    let set1 : Set = {
-        pos : make_arrayOfarray([lefteye, righteye]),
-        colors : ["blue", "red"],
-    }
-    let set2 : Set = {
-        pos : make_arrayOfarray([make_number_line([5])]),
-        colors : ["green", "yellow"],
-    }
-    const list_set : Set[] = [set1, set2];
+    let set1: Set = {
+        pos: make_arrayOfarray([lefteye, righteye]),
+        colors: ["blue", "red"],
+    };
+    let set2: Set = {
+        pos: make_arrayOfarray([make_number_line([5])]),
+        colors: ["green", "yellow"],
+    };
+    const list_set: Set[] = [set1, set2];
 
     //////////////////////////////////////////////////
-    
-    const PIXELS_STYLE = [
-        "", ...Array(7).fill("border_top"), "",
-        "border_left", ...Array(7).fill(""), "border_rigth",
-        "border_left", ...Array(7).fill(""), "border_rigth",
-        "border_left", ...Array(7).fill(""), "border_rigth",
-        "border_left", "", "", "", "center", "", "", "", "border_rigth",
-        "border_left", ...Array(7).fill(""), "border_rigth",
-        "border_left", ...Array(7).fill(""), "border_rigth",
-        "border_left", ...Array(7).fill(""), "border_rigth",
-        "", ...Array(7).fill("border_top"), "",
-    ];
-    
+
+    const PIXELS_STYLE = Array.from(
+        "ptttttttp lpppppppr lpppppppr lpppppppr lpppcpppr lpppppppr lpppppppr lpppppppr pbbbbbbbp"
+    )
+        .map((c) => {
+            if (c == "p") return "pixel";
+            if (c == "t") return "pixel border_top";
+            if (c == "b") return "pixel border_bottom";
+            if (c == "l") return "pixel border_left";
+            if (c == "r") return "pixel border_rigth";
+            if (c == "c") return "center";
+        })
+        .filter((v) => v);
 </script>
 
 <div class="contenidor">
     <div class="face">
         {#each PIXELS_STYLE as style, i}
-            <div class="pixel {style} {colors.white[i]}" on:click={()=>changeColor(i)} />
+            <div
+                class="{style} {colors.white[i]}"
+                on:click={() => changeColor(i)}
+            />
         {/each}
     </div>
     <div class="input">
         <div class="colors">
-            <input type="button" class="button" value="WHITE ">
-            <input type="button" class="button" value="BLUE  ">
-            <input type="button" class="button" value="RED   ">
-            <input type="button" class="button" value="GREEN ">
-            <input type="button" class="button" value="ORANGE">
-            <input type="button" class="button" value="YELLOW">
+            <input type="button" class="button" value="WHITE " />
+            <input type="button" class="button" value="BLUE  " />
+            <input type="button" class="button" value="RED   " />
+            <input type="button" class="button" value="GREEN " />
+            <input type="button" class="button" value="ORANGE" />
+            <input type="button" class="button" value="YELLOW" />
         </div>
 
-
-        <input type="button" class="button" value="CREATE SET" on:click={createfullSet} />
-        <input type="button" class="button" value="RANDOM SET" on:click={randomSet} />
+        <input
+            type="button"
+            class="button"
+            value="CREATE SET"
+            on:click={createfullSet}
+        />
+        <input
+            type="button"
+            class="button"
+            value="RANDOM SET"
+            on:click={randomSet}
+        />
         <input type="button" class="button" value="RESET" on:click={reset} />
     </div>
 </div>
@@ -219,12 +219,10 @@
         margin-right: 0;
     }
 
-    .color.button 
-    {
+    .color.button {
         margin: 10px;
     }
-    .colors
-    {
+    .colors {
         display: grid;
         grid-template-rows: 50fr 50fr;
         grid-template-columns: 50fr 50fr 50fr;
@@ -237,11 +235,10 @@
         display: block;
         box-sizing: border-box;
         position: fixed;
-   
+
         bottom: 100px;
         right: 200px;
     }
-
 
     .button {
         display: inline-block;
