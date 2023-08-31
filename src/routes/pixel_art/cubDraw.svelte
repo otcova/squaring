@@ -2,6 +2,7 @@
     import { each } from "svelte/internal";
 
     const NumberofPixels = 89; 
+    let PaintingColor = 0;
 
     const ColorsList: string[] = [
         "white",
@@ -30,7 +31,6 @@
         pos: [],
         colors: [],
     }]
-
 
     let colors: Colors = {
         white: [],
@@ -152,9 +152,9 @@
     }
 
     //$: {}
-
+    ////////////////////////////////////////////////////////////////////////
     function changeColor(pos: number) {
-        colors.white[pos] = ColorsList[colorNumber(colors.white[pos]) + 1];
+        colors.white[pos] = ColorsList[PaintingColor];
     }
 
     /////////////////////////////////////////////////////
@@ -172,7 +172,11 @@
     const list_set : Set[] = [set1, set2];
 
     //////////////////////////////////////////////////
-    
+    function change_paitingColor(color : number)
+    {
+        PaintingColor = color;
+    }
+    ////////////////////////////////////////////////////
     const PIXELS_STYLE = [
         "", ...Array(7).fill("border_top"), "",
         "border_left", ...Array(7).fill(""), "border_rigth",
@@ -184,7 +188,6 @@
         "border_left", ...Array(7).fill(""), "border_rigth",
         "", ...Array(7).fill("border_top"), "",
     ];
-    
 </script>
 
 <div class="contenidor">
@@ -195,12 +198,12 @@
     </div>
     <div class="input">
         <div class="colors">
-            <input type="button" class="button" value="WHITE ">
-            <input type="button" class="button" value="BLUE  ">
-            <input type="button" class="button" value="RED   ">
-            <input type="button" class="button" value="GREEN ">
-            <input type="button" class="button" value="ORANGE">
-            <input type="button" class="button" value="YELLOW">
+            <input type="button" class="button white" value="   " on:click={()=>change_paitingColor(0)}>
+            <input type="button" class="button blue" value="   " on:click={()=>change_paitingColor(1)}>
+            <input type="button" class="button red" value="   " on:click={()=>change_paitingColor(2)}>
+            <input type="button" class="button green" value="   " on:click={()=>change_paitingColor(3)}>
+            <input type="button" class="button orange" value="   " on:click={()=>change_paitingColor(4)}>
+            <input type="button" class="button yellow" value="   " on:click={()=>change_paitingColor(5)}>
         </div>
 
 
@@ -219,17 +222,20 @@
         margin-right: 0;
     }
 
-    .color.button 
-    {
-        margin: 10px;
-    }
+
     .colors
     {
         display: grid;
-        grid-template-rows: 50fr 50fr;
-        grid-template-columns: 50fr 50fr 50fr;
         box-sizing: border-box;
         position: fixed;
+        grid-template-rows: 50fr 50fr;
+        grid-template-columns: 50fr 50fr 50fr;
+
+        background-color: #3c4fc0;
+        border-radius: 6px;
+        padding: 8px;
+        gap: 5px;
+    
         bottom: 200px;
         right: 200px;
     }
@@ -248,6 +254,7 @@
         outline: none;
         border: none;
         cursor: pointer;
+
 
         will-change: box-shadow, transform;
         background: radial-gradient(
