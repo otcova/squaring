@@ -1,17 +1,10 @@
 <script lang="ts">
     import { each } from "svelte/internal";
-
-    const NumberofPixels = 89; 
+    import Pixel from "./pixel"
+    const NumberofPixels = 81; 
     let PaintingColor = 0;
 
-    const ColorsList: string[] = [
-        "white",
-        "blue",
-        "red",
-        "green",
-        "orange",
-        "yellow",
-    ];
+
 
     interface Colors {
         white: string[];
@@ -46,86 +39,11 @@
     }
 
     ////////////////////////////////////////////////
-    function colorNumber(color: string) {
-        for (let i = 0; i < 6; ++i) {
-            if (ColorsList[i] == color) return i;
-        }
-        return -1;
-    }
-
-    function randColor() {
-        let i: number = Math.round(Math.random() * 10) % 6;
-        return ColorsList[i];
-    }
-
-    function restictionColor(choose_colors : string[]) {
-        let i: number = Math.round(Math.random()) % choose_colors.length;
-        return choose_colors[i];
-    }
-
-    function get_number(i : number, j : number)
-    {
-        return i*9 + j;
-    }
-
-    function make_number_array(begin : number, end : number)
-    {
-        let list = [];
-        for (let i = begin; i <= end; ++i)
-            list.push(i);
-        return list;
-    }
-
-    function make_arrayOfarray(listoflist : number[][])
-    {
-        let list : number[] = [];
-        listoflist.forEach(array => {
-            array.forEach(element => {
-                list.push(element);
-            });
-        });
-        return list;
-    }
-
-    function make_number_line(list_number : number[])
-    {
-        let list : number[] = [];
-        list_number.forEach(element => {
-            for (let i = 0; i < 9; ++i)
-                list.push(element*9 + i);
-        });
-        return list;
-    }
-
-    function make_number_column(list_number : number[])
-    {
-        let list : number[] = [];
-        list_number.forEach(element => {
-            for (let i = 0; i < 9; ++i)
-                list.push(element + i*9);
-        });
-        return list;
-    }
-
-    function make_number_rectangle(begin : number, end : number)
-    {
-        let list = [];
-        let width = Math.abs(end%9 - begin%9);
-        let height = Math.abs(Math.round(end/9) - Math.round(begin/9));
-        console.log(height);
-        for (let i = 0; i < height + 1; ++i)
-        {
-            for(let j = 0; j < width + 1; ++j)
-                list.push(begin+9*i + j);
-        }
-        return list;
-    }
-
-    /////////////////////////////////////////////////////
     function createSet(set : Set)
     {
         set.pos.forEach(element => {
-            let color: string = restictionColor(set.colors);
+            let color: string = Pixel.chooseColor(set.colors);
+            console.log(color);
             colors.white[element] = color;
         });
     }
@@ -139,14 +57,14 @@
 
     function randomSet() {
         for (let i = 0; i < NumberofPixels; ++i) {
-            let color: string = randColor();
+            let color: string = Pixel.randColor();
             colors.white[i] = color;
         }
     }
 
     function reset() {
         for (let i = 0; i < NumberofPixels; ++i) {
-            let color: string = randColor();
+            let color: string = Pixel.randColor();
             colors.white[i] = "white";
         }
     }
@@ -154,22 +72,27 @@
     //$: {}
     ////////////////////////////////////////////////////////////////////////
     function changeColor(pos: number) {
-        colors.white[pos] = ColorsList[PaintingColor];
+        colors.white[pos] = Pixel.ColorsList[PaintingColor];
     }
 
     /////////////////////////////////////////////////////
-    const lefteye = make_number_rectangle(get_number(2, 2), get_number(3, 3));
-    const righteye = make_number_rectangle(get_number(2, 5), get_number(3, 6));
+    const lefteye = Pixel.make_number_rectangle([2, 2], [3, 3]);
+    const righteye = Pixel.make_number_rectangle([2, 5], [3, 6]);
+
+    let set0 : Set = {
+        pos : Pixel.make_arrayOfarray([Pixel.make_number_rectangle([1, 1], [4, 7])]),
+        colors : [Pixel.chooseColor(["green", "orange"])],
+    }
 
     let set1 : Set = {
-        pos : make_arrayOfarray([lefteye, righteye]),
+        pos : Pixel.make_arrayOfarray([lefteye, righteye]),
         colors : ["blue", "red"],
     }
     let set2 : Set = {
-        pos : make_arrayOfarray([make_number_line([5])]),
+        pos : Pixel.make_arrayOfarray([Pixel.make_number_rectangle([7, 2], [7, 6])]),
         colors : ["green", "yellow"],
     }
-    const list_set : Set[] = [set1, set2];
+    const list_set : Set[] = [set0];
 
     //////////////////////////////////////////////////
     function change_paitingColor(color : number)
