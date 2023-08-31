@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { each } from "svelte/internal";
-
     const NumberofPixels = 89;
     let PaintingColor = 0;
 
