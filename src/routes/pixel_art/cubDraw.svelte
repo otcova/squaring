@@ -177,30 +177,12 @@
 <div class="contenidor">
     <div class="face">
         <div class="pixel {colors.white[0]}" on:click={()=>changeColor(0)} />
-        <div
-            class="pixel border_top {colors.white[1]}"
-            on:click={()=>changeColor(1)}
-        />
-        <div
-            class="pixel border_top {colors.white[2]}"
-            on:click={()=>changeColor(2)}
-        />
-        <div
-            class="pixel border_top {colors.white[3]}"
-            on:click={()=>changeColor(3)}
-        />
-        <div
-            class="pixel border_top {colors.white[4]}"
-            on:click={()=>changeColor(4)}
-        />
-        <div
-            class="pixel border_top {colors.white[5]}"
-            on:click={()=>changeColor(5)}
-        />
-        <div
-            class="pixel border_top {colors.white[6]}"
-            on:click={()=>changeColor(6)}
-        />
+        <div class="pixel border_top {colors.white[1]}" on:click={()=>changeColor(1)} />
+        <div class="pixel border_top {colors.white[2]}" on:click={()=>changeColor(2)} />
+        <div class="pixel border_top {colors.white[3]}" on:click={()=>changeColor(3)} />
+        <div class="pixel border_top {colors.white[4]}" on:click={()=>changeColor(4)} />
+        <div class="pixel border_top {colors.white[5]}" on:click={()=>changeColor(5)} />
+        <div class="pixel border_top {colors.white[6]}" on:click={()=>changeColor(6)} />
         <div
             class="pixel border_top {colors.white[7]}"
             on:click={()=>changeColor(7)}
