@@ -124,16 +124,9 @@
     /////////////////////////////////////////////////////
     function createSet()
     {
-        set.pos.forEach(element => {
+        Pos.forEach(element => {
             let color: string = restictionColor(ChooseColros);
             colors.white[element] = color;
-        });
-    }
-
-    function createfullSet()
-    {
-        Sets.forEach(element => {
-            createSet(element);
         });
     }
 
@@ -403,8 +396,9 @@
     let sets : Set[]; 
     const lefteye = make_number_rectangle(get_number(2, 2), get_number(3, 3));
     const righteye = make_number_rectangle(get_number(2, 5), get_number(3, 6));
-    sets[].pos = make_arrayOfarray([lefteye, righteye]);
-    sets[0].colors = ["red", "blue"];
+
+    const Pos = make_arrayOfarray([lefteye, righteye]);
+    const ChooseColros = ["blue", "red"];
     //////////////////////////////////////////////////
 </script>
 
