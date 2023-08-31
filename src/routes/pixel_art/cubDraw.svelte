@@ -333,7 +333,7 @@
         <div class="pixel {colors.white[80]}" on:click={()=>changeColor(80)} />
     </div>
     <div class="input">
-        <input type="button" class="button" value="CREATE SET" on:click={createSet} />
+        <input type="button" class="button" value="CREATE SET" on:click={createfullSet} />
         <input type="button" class="button" value="RANDOM SET" on:click={randomSet} />
         <input type="button" class="button" value="RESET" on:click={reset} />
     </div>
