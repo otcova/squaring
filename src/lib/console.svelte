@@ -2,7 +2,7 @@
     import { error } from "@sveltejs/kit";
     import { onMount } from "svelte";
     import { solves } from "./solves";
-    import { Cub } from "../routes/pixel_art/cub";
+    import { Cub } from "../routes/pixel_art/pixel";
 
     let contenedor: HTMLDivElement;
     let input: HTMLInputElement;
