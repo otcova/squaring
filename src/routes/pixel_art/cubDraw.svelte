@@ -232,21 +232,19 @@
     }
 
     function right() {
-        let new_background :string[] = background;
-        for (let i = NumberofPixels - 1; i >= 0; --i) {
+        let new_background :string[] = [];
+        for (let i = NumberofPixels - 1; i >= 0; --i) 
             new_background[i] = background[i-1];
-        }
         for(let i = 0; i < NumberofPixels; i += 9)
             new_background[i] = background[i+8];
         background = new_background;
     }
 
     function left() {
-        let new_background :string[] = background;
-        for (let i = 0; i < NumberofPixels; ++i) {
-            new_background[i] = background[i+1];
-        }
-        for(let i = 8; i < NumberofPixels; i += 9)
+        let new_background :string[] = [];
+        for (let i = 0; i < NumberofPixels; ++i) 
+            new_background[i] = background[i+1];    
+        for (let i = 8; i < NumberofPixels; i += 9)
             new_background[i] = background[i-8];
         background = new_background;
     }
