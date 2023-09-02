@@ -31,18 +31,6 @@
         blue: [],
         yellow: [],
     };
-
-    interface Set {
-        pos: number[];
-        colors: string[];
-    }
-
-    let set: Set[] = [
-        {
-            pos: [],
-            colors: [],
-        },
-    ];
     //////////////////////////////////////////////////////
     for (let i = 0; i < NumberofPixels; ++i) {
         colors.white[i] = "white";
@@ -129,7 +117,7 @@
     /////////////////////////////////////////////////////
     function createSet(set: Set) {
         set.pos.forEach((element) => {
-            let color: string = restictionColor(set.colors);
+            let color: string = chooseColor(set.colors);
             colors.white[element] = color;
         });
     }
