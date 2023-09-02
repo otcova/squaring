@@ -299,11 +299,11 @@
 
         <div class="oriantation">
             <input type="button" class="button" value="@" on:click={bad_rotate}/>
-            <input type="button" class="button" value="UP" on:click={up} />
+            <input type="button" class="button" value="▲" on:click={up} />
             <input type="button" class="button" value="↻" on:click={rotate} />
-            <input type="button" class="button" value="LEFT" on:click={left}/>
-            <input type="button" class="button" value="DOWN" on:click={down}/>
-            <input type="button" class="button" value="RIGHT" on:click={right}/>
+            <input type="button" class="button" value="◄" on:click={left}/>
+            <input type="button" class="button" value="▼" on:click={down}/>
+            <input type="button" class="button" value="►" on:click={right}/>
 
         </div>
     </div>
