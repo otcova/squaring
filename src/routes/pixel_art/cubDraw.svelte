@@ -183,13 +183,15 @@
     ///////////////////////////////////////////////////////////////////////////////
     function rotate()
     {
+        let new_background: string[] = [];
         for (let i = 0; i < NumberofPixels; ++i)
         {
             let ori = get_cord(i);
             let cord = get_number([ori[1], 8 - ori[0]]);
             console.log(cord);
-            background[cord] = background[i];
+            new_background[cord] = background[i];
         }
+        background = new_background;
     }
 </script>
 
@@ -233,7 +235,7 @@
         </div>
 
         <div class="oriantation">
-            <input type="button" class="button" value="@" on:click={rotate}>
+            <input type="button" class="button" value="↻" on:click={rotate}>
             <input type="button" class="button" value="UP">
             <input type="button" class="button" value="DOWN">
         </div>
