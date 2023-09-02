@@ -223,7 +223,22 @@
         }
         background = background;
     }
+
     function down() {
+        for (let i = 0; i < 9; ++i) {
+            background.unshift(background.pop() as string);
+        }
+        background = background;
+    }
+
+    function right() {
+        for (let i = 0; i < 9; ++i) {
+            background.unshift(background.pop() as string);
+        }
+        background = background;
+    }
+
+    function left() {
         for (let i = 0; i < 9; ++i) {
             background.unshift(background.pop() as string);
         }
@@ -242,6 +257,7 @@
             />
         {/each}
     </div>
+    
     <div class="input">
         <div class="colors">
             {#each COLORS as color, i}
@@ -275,15 +291,13 @@
         </div>
 
         <div class="oriantation">
-            <input
-                type="button"
-                class="button"
-                value="@"
-                on:click={bad_rotate}
-            />
+            <input type="button" class="button" value="@" on:click={bad_rotate}/>
             <input type="button" class="button" value="UP" on:click={up} />
             <input type="button" class="button" value="↻" on:click={rotate} />
+            <input type="button" class="button" value="RIGHT" on:click={right}/>
             <input type="button" class="button" value="DOWN" on:click={down}/>
+            <input type="button" class="button" value="LEFT" on:click={left}/>
+
         </div>
     </div>
 </div>
@@ -297,6 +311,18 @@
         margin-right: 0;
     }
 
+    .title {
+        display: block;
+        box-sizing: border-box;
+        position: relative;
+
+        background-color: #3c50c0;
+        border-radius: 6px;
+        padding: 8px;
+        margin: 0px;
+        font-size: 18px;
+    }
+
     .colors {
         display: grid;
         box-sizing: border-box;
@@ -304,7 +330,7 @@
         grid-template-rows: 50fr 50fr;
         grid-template-columns: 50fr 50fr 50fr;
 
-        background-color: #3c4fc0;
+        background-color: #3c50c0;
         border-radius: 6px;
         padding: 8px;
         gap: 5px;
@@ -316,9 +342,9 @@
         box-sizing: border-box;
         position: relative;
         grid-template-rows: 50fr 50fr;
-        grid-template-columns: 50fr 50fr;
+        grid-template-columns: 50fr 50fr 50fr;
 
-        background-color: #3c4fc0;
+        background-color: #3c50c0;
         border-radius: 6px;
         padding: 8px;
         gap: 5px;
@@ -331,7 +357,7 @@
         grid-template-rows: 50fr;
         grid-template-columns: 50fr 50fr 50fr;
 
-        background-color: #3c4fc0;
+        background-color: #3c50c0;
         border-radius: 6px;
         padding: 8px;
         gap: 5px;
