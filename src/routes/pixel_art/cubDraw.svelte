@@ -170,6 +170,13 @@
         PaintingColor = color;
     }
 
+    function handleMouseMove(event : MouseEvent, i : number)
+    {
+        if (event.buttons == 1)
+            changeColor(i);        
+        
+    }
+
     const PIXELS_STYLE = Array.from(
         "ptttttttp lpppppppr lpppppppr lpppppppr lpppcpppr lpppppppr lpppppppr lpppppppr pbbbbbbbp"
     )
@@ -192,6 +199,8 @@
             <div
                 class="{style} {colors.white[i]}"
                 on:click={() => changeColor(i)}
+                on:mousemove = {event => handleMouseMove(event, i)}
+                
             />
         {/each}
     </div>
