@@ -1,6 +1,6 @@
 <script lang="ts">
     const NumberofPixels = 81;
-    let PaintingColor = 0;
+    let PaintingColor = 1; // default painting color // blue
 
     interface Colors {
         white: string[];
@@ -33,7 +33,7 @@
     };
     //////////////////////////////////////////////////////
     for (let i = 0; i < NumberofPixels; ++i) {
-        colors.white[i] = "white";
+        colors.white[i] = "white"; // background
     }
     /////////////////////////////////////////////////////
     const ColorsList: string[] = [
