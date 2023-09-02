@@ -164,7 +164,7 @@
         pos: make_arrayOfarray([make_number_line([5])]),
         colors: ["green", "yellow"],
     };
-    const list_set: Set[] = [set1, set2];
+    const list_set: Set[] = [set0, set1, set2];
 
     function change_paitingColor(color: number) {
         PaintingColor = color;
