@@ -55,6 +55,11 @@
     function randInt(min: number, max: number) {
         return Math.trunc(min + Math.random() * (max - min));
     }
+    
+    function pickRandom<T>(list: T[]): T {
+        return list[Math.trunc(Math.random() * list.length)];
+    }
+
 
     function randColor() {
         let i: number = randInt(0, 6);
@@ -62,9 +67,7 @@
     }
 
     function chooseColor(choose_colors: string[]) {
-        let i: number = randInt(0, 2);
-        console.log(i);
-        return choose_colors[i];
+        return  pickRandom(choose_colors);
     }
 
     function get_number(cord: number[]) {
