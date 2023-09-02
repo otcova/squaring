@@ -1,73 +1,38 @@
 <script lang="ts">
+    import { NUMBER_OF_PROCESSORS } from "$env/static/private";
+
     const NumberofPixels = 81;
     let PaintingColor = 1; // default painting color // blue
-
-    interface Colors {
-        white: string[];
-        orange: string[];
-        green: string[];
-        red: string[];
-        blue: string[];
-        yellow: string[];
-    }
+    const COLORS = ["white", "blue", "red", "green", "orange", "yellow"];
 
     interface Set {
         pos: number[];
         colors: string[];
     }
-
-    let set: Set[] = [
-        {
-            pos: [],
-            colors: [],
-        },
-    ];
-
-    let colors: Colors = {
-        white: [],
-        orange: [],
-        green: [],
-        red: [],
-        blue: [],
-        yellow: [],
-    };
+    
     //////////////////////////////////////////////////////
+    let background: string[] = [];
+
     for (let i = 0; i < NumberofPixels; ++i) {
-        colors.white[i] = "white"; // background
+        background[i] = "white"; // background
     }
     /////////////////////////////////////////////////////
-    const ColorsList: string[] = [
-        "white",
-        "blue",
-        "red",
-        "green",
-        "orange",
-        "yellow",
-    ];
-
-    function colorNumber(color: string) {
-        for (let i = 0; i < 6; ++i) {
-            if (ColorsList[i] == color) return i;
-        }
-        return -1;
-    }
 
     function randInt(min: number, max: number) {
         return Math.trunc(min + Math.random() * (max - min));
     }
-    
+
     function pickRandom<T>(list: T[]): T {
         return list[Math.trunc(Math.random() * list.length)];
     }
 
-
     function randColor() {
         let i: number = randInt(0, 6);
-        return ColorsList[i];
+        return COLORS[i];
     }
 
     function chooseColor(choose_colors: string[]) {
-        return  pickRandom(choose_colors);
+        return pickRandom(choose_colors);
     }
 
     function get_number(cord: number[]) {
@@ -118,14 +83,60 @@
     }
 
     /////////////////////////////////////////////////////
+    const orientationX = 0;
+    const orientationY = 0;
+
     function createSet(set: Set) {
         set.pos.forEach((element) => {
             let color: string = chooseColor(set.colors);
-            colors.white[element] = color;
+            background[element+orientationX+orientationY*9] = color;
         });
     }
 
+    /////////////////////////////////////////////////////
+
+        function make_face() {
+        const lefteye = make_rec([3, 2], [4, 3]);
+        const righteye = make_rec([3, 5], [4, 6]);
+        
+        //ears
+        let ears : Set = {
+            pos: make_arrayOfarray([[get_number([0, 1])], [get_number([1, 2])], [get_number([0, 5])], [get_number([1, 6])]]),
+            colors: [chooseColor(["green", "orange"])],
+        }
+
+        let face: Set = {
+            pos: make_arrayOfarray([make_rec([2, 1], [6, 7])]),
+            colors: [chooseColor(["green", "orange"])],
+        };
+ 
+        let eyes: Set = {
+            pos: make_arrayOfarray([lefteye, righteye]),
+            colors: ["blue", "red"],
+        };
+  
+        let mouth: Set = {
+            pos: make_arrayOfarray([make_rec([7, 1], [7, 7])]),
+            colors: ["green", "yellow"],
+        };
+
+        let legs : Set = {
+            pos: make_arrayOfarray([make_rec([7, 2], [8, 2]), make_rec([7, 4], [8, 4]), make_rec([7, 6], [8, 6])]),
+            colors: [chooseColor(["green", "yellow"])],
+        }
+
+
+        return [face, ears, eyes, legs];
+    }
+
+    //////////////////////////////////////////////////////////////////
+    function make_list_set()
+    {
+        return make_face();
+    }
+
     function createfullSet() {
+        let list_set: Set[] = make_list_set();
         list_set.forEach((element) => {
             createSet(element);
         });
@@ -134,52 +145,31 @@
     function randomSet() {
         for (let i = 0; i < NumberofPixels; ++i) {
             let color: string = randColor();
-            colors.white[i] = color;
+            background[i] = color;
         }
     }
 
     function reset() {
         for (let i = 0; i < NumberofPixels; ++i) {
             let color: string = randColor();
-            colors.white[i] = "white";
+            background[i] = "white";
         }
     }
 
     //$: {}
     ////////////////////////////////////////////////////////////////////////
     function changeColor(pos: number) {
-        colors.white[pos] = ColorsList[PaintingColor];
+        background[pos] = COLORS[PaintingColor];
     }
-    /////////////////////////////////////////////////////
-    const lefteye = make_rec([2, 2], [3, 3]);
-    const righteye = make_rec([2, 5], [3, 6]);
-
-    let set0: Set = {
-        pos: make_arrayOfarray([make_rec([1, 1], [4, 7])]),
-        colors: [chooseColor(["green", "orange"])],
-    };
-
-    let set1: Set = {
-        pos: make_arrayOfarray([lefteye, righteye]),
-        colors: ["blue", "red"],
-    };
-    let set2: Set = {
-        pos: make_arrayOfarray([make_number_line([5])]),
-        colors: ["green", "yellow"],
-    };
-    const list_set: Set[] = [set0, set1, set2];
 
     function change_paitingColor(color: number) {
         PaintingColor = color;
     }
 
-    function handleMouseMove(event : MouseEvent, i : number)
-    {
-        if (event.buttons == 1)
-            changeColor(i);        
-        
+    function handleMouseMove(event: MouseEvent, i: number) {
+        if (event.buttons == 1) changeColor(i);
     }
-
+    ////////////////////////////////////////////////////////////////////////////////////
     const PIXELS_STYLE = Array.from(
         "ptttttttp lpppppppr lpppppppr lpppppppr lpppcpppr lpppppppr lpppppppr lpppppppr pbbbbbbbp"
     )
@@ -192,24 +182,27 @@
             if (c == "c") return "center";
         })
         .filter((v) => v);
-
-    const COLORS = ["white", "blue", "red", "green", "orange", "yellow"];
+    ///////////////////////////////////////////////////////////////////////////////
+    function rotate()
+    {
+        for (let i = 0; i < NumberofPixels; ++i)
+            background[i] = background[i+9];
+    }
 </script>
 
 <div class="container">
     <div class="face">
         {#each PIXELS_STYLE as style, i}
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
             <div
-                class="{style} {colors.white[i]}"
+                class="{style} {background[i]}"
                 on:click={() => changeColor(i)}
-                on:mousemove = {event => handleMouseMove(event, i)}
-                
+                on:mousemove={(event) => handleMouseMove(event, i)}
             />
         {/each}
     </div>
     <div class="input">
         <div class="colors">
-
             {#each COLORS as color, i}
                 <input
                     type="button"
@@ -218,21 +211,29 @@
                     on:click={() => change_paitingColor(i)}
                 />
             {/each}
+            
+        </div>
+        <div class="set">
+            <input
+                type="button"
+                class="button"
+                value="CREATE SET"
+                on:click={createfullSet}
+            />
+            <input
+                type="button"
+                class="button"
+                value="RANDOM SET"
+                on:click={randomSet}
+            />
+            <input type="button" class="button" value="RESET" on:click={reset} />
         </div>
 
-        <input
-            type="button"
-            class="button"
-            value="CREATE SET"
-            on:click={createfullSet}
-        />
-        <input
-            type="button"
-            class="button"
-            value="RANDOM SET"
-            on:click={randomSet}
-        />
-        <input type="button" class="button" value="RESET" on:click={reset} />
+        <div class="oriantation">
+            <input type="button" class="button" value="@" on:click={rotate}>
+            <input type="button" class="button" value="UP">
+            <input type="button" class="button" value="DOWN">
+        </div>
     </div>
 </div>
 
@@ -248,7 +249,7 @@
     .colors {
         display: grid;
         box-sizing: border-box;
-        position: fixed;
+        position: relative;
         grid-template-rows: 50fr 50fr;
         grid-template-columns: 50fr 50fr 50fr;
 
@@ -257,16 +258,43 @@
         padding: 8px;
         gap: 5px;
 
-        bottom: 200px;
-        right: 200px;
+        width: 170px;
     }
+    .oriantation {
+        display: grid;
+        box-sizing: border-box;
+        position: relative;
+        grid-template-rows: 50fr;
+        grid-template-columns: 50fr 50fr 50fr;
+
+        background-color: #3c4fc0;
+        border-radius: 6px;
+        padding: 8px;
+        gap: 5px;
+
+    }
+
+    .set {
+        display: grid;
+        box-sizing: border-box;
+        position: relative;
+        grid-template-rows: 50fr;
+        grid-template-columns: 50fr 50fr 50fr;
+
+        background-color: #3c4fc0;
+        border-radius: 6px;
+        padding: 8px;
+        gap: 5px;
+
+    }
+
     .input {
         display: block;
         box-sizing: border-box;
         position: fixed;
 
         bottom: 100px;
-        right: 200px;
+        left: 1300px;
     }
 
     .button {
