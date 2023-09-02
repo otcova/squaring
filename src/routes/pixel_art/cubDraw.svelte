@@ -1,9 +1,5 @@
 <script lang="ts">
-<<<<<<< HEAD
     const NumberofPixels = 81;
-=======
-    const NumberofPixels = 89;
->>>>>>> e7e9028bcb29ba11306badd1b32a85d8ec9f4e02
     let PaintingColor = 0;
 
     interface Colors {
@@ -15,8 +11,6 @@
         yellow: string[];
     }
 
-<<<<<<< HEAD
-=======
     interface Set {
         pos: number[];
         colors: string[];
@@ -29,7 +23,6 @@
         },
     ];
 
->>>>>>> e7e9028bcb29ba11306badd1b32a85d8ec9f4e02
     let colors: Colors = {
         white: [],
         orange: [],
@@ -80,7 +73,6 @@
         return ColorsList[i];
     }
 
-<<<<<<< HEAD
     function chooseColor(choose_colors: string[]) {
         let i: number = randInt(0, 2);
         console.log(i);
@@ -89,15 +81,6 @@
 
     function get_number(cord: number[]) {
         return cord[0] * 9 + cord[1];
-=======
-    function restictionColor(choose_colors: string[]) {
-        let i: number = Math.round(Math.random()) % choose_colors.length;
-        return choose_colors[i];
-    }
-
-    function get_number(i: number, j: number) {
-        return i * 9 + j;
->>>>>>> e7e9028bcb29ba11306badd1b32a85d8ec9f4e02
     }
 
     function make_number_array(begin: number, end: number) {
@@ -132,7 +115,6 @@
         return list;
     }
 
-<<<<<<< HEAD
     function make_rec(begin: number[], end: number[]) {
         let list = [];
         let height = Math.abs(end[0] - begin[0]);
@@ -140,31 +122,14 @@
         for (let i = 0; i < height + 1; ++i) {
             for (let j = 0; j < width + 1; ++j)
                 list.push(get_number([begin[0] + i, begin[1]]) + j);
-=======
-    function make_number_rectangle(begin: number, end: number) {
-        let list = [];
-        let width = Math.abs((end % 9) - (begin % 9));
-        let height = Math.abs(Math.round(end / 9) - Math.round(begin / 9));
-        console.log(height);
-        for (let i = 0; i < height + 1; ++i) {
-            for (let j = 0; j < width + 1; ++j) list.push(begin + 9 * i + j);
->>>>>>> e7e9028bcb29ba11306badd1b32a85d8ec9f4e02
         }
         return list;
     }
 
-<<<<<<< HEAD
-    ////////////////////////////////////////////////
-    function createSet(set: Set) {
-        set.pos.forEach((element) => {
-            let color: string = chooseColor(set.colors);
-            console.log(color);
-=======
     /////////////////////////////////////////////////////
     function createSet(set: Set) {
         set.pos.forEach((element) => {
             let color: string = restictionColor(set.colors);
->>>>>>> e7e9028bcb29ba11306badd1b32a85d8ec9f4e02
             colors.white[element] = color;
         });
     }
@@ -198,66 +163,16 @@
     const lefteye = make_rec([2, 2], [3, 3]);
     const righteye = make_rec([2, 5], [3, 6]);
 
-<<<<<<< HEAD
     let set0: Set = {
         pos: make_arrayOfarray([make_rec([1, 1], [4, 7])]),
         colors: [chooseColor(["green", "orange"])],
     };
 
-=======
->>>>>>> e7e9028bcb29ba11306badd1b32a85d8ec9f4e02
     let set1: Set = {
         pos: make_arrayOfarray([lefteye, righteye]),
         colors: ["blue", "red"],
     };
     let set2: Set = {
-<<<<<<< HEAD
-        pos: make_arrayOfarray([make_rec([7, 2], [7, 6])]),
-        colors: ["green", "yellow"],
-    };
-    const list_set: Set[] = [set0];
-
-    //////////////////////////////////////////////////
-    function change_paintingColor(color: number) {
-        PaintingColor = color;
-    }
-    ////////////////////////////////////////////////////
-    const PIXELS_STYLE = [
-        "",
-        ...Array(7).fill("border_top"),
-        "",
-        "border_left",
-        ...Array(7).fill(""),
-        "border_right",
-        "border_left",
-        ...Array(7).fill(""),
-        "border_right",
-        "border_left",
-        ...Array(7).fill(""),
-        "border_right",
-        "border_left",
-        "",
-        "",
-        "",
-        "center",
-        "",
-        "",
-        "",
-        "border_right",
-        "border_left",
-        ...Array(7).fill(""),
-        "border_right",
-        "border_left",
-        ...Array(7).fill(""),
-        "border_right",
-        "border_left",
-        ...Array(7).fill(""),
-        "border_right",
-        "",
-        ...Array(7).fill("border_top"),
-        "",
-    ];
-=======
         pos: make_arrayOfarray([make_number_line([5])]),
         colors: ["green", "yellow"],
     };
@@ -281,62 +196,20 @@
         .filter((v) => v);
 
     const COLORS = ["white", "blue", "red", "green", "orange", "yellow"];
->>>>>>> e7e9028bcb29ba11306badd1b32a85d8ec9f4e02
 </script>
 
 <div class="container">
     <div class="face">
         {#each PIXELS_STYLE as style, i}
             <div
-<<<<<<< HEAD
-                class="pixel {style} {colors.white[i]}"
-=======
                 class="{style} {colors.white[i]}"
->>>>>>> e7e9028bcb29ba11306badd1b32a85d8ec9f4e02
                 on:click={() => changeColor(i)}
             />
         {/each}
     </div>
     <div class="input">
         <div class="colors">
-<<<<<<< HEAD
-            <input
-                type="button"
-                class="button white"
-                value="   "
-                on:click={() => change_paintingColor(0)}
-            />
-            <input
-                type="button"
-                class="button blue"
-                value="   "
-                on:click={() => change_paintingColor(1)}
-            />
-            <input
-                type="button"
-                class="button red"
-                value="   "
-                on:click={() => change_paintingColor(2)}
-            />
-            <input
-                type="button"
-                class="button green"
-                value="   "
-                on:click={() => change_paintingColor(3)}
-            />
-            <input
-                type="button"
-                class="button orange"
-                value="   "
-                on:click={() => change_paintingColor(4)}
-            />
-            <input
-                type="button"
-                class="button yellow"
-                value="   "
-                on:click={() => change_paintingColor(5)}
-            />
-=======
+
             {#each COLORS as color, i}
                 <input
                     type="button"
@@ -345,7 +218,6 @@
                     on:click={() => change_paitingColor(i)}
                 />
             {/each}
->>>>>>> e7e9028bcb29ba11306badd1b32a85d8ec9f4e02
         </div>
 
         <input
@@ -373,12 +245,6 @@
         margin-right: 0;
     }
 
-<<<<<<< HEAD
-=======
-    .color.button {
-        margin: 10px;
-    }
->>>>>>> e7e9028bcb29ba11306badd1b32a85d8ec9f4e02
     .colors {
         display: grid;
         box-sizing: border-box;
