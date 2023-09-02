@@ -183,6 +183,7 @@
     ///////////////////////////////////////////////////////////////////////////////
     function rotate()
     {
+<<<<<<< HEAD
         let new_background : string[] = [];
         for (let i = 0; i < NumberofPixels; ++i)
         {
@@ -195,12 +196,21 @@
 
     function bad_rotate()
     {
+=======
+        let new_background: string[] = [];
+>>>>>>> 40b1898833b06aaac759a7189aface117aa3ec8c
         for (let i = 0; i < NumberofPixels; ++i)
         {
             let ori = get_cord(i);
             let cord = get_number([ori[1], 8 - ori[0]]);
+<<<<<<< HEAD
             background[cord] = background[i];
+=======
+            console.log(cord);
+            new_background[cord] = background[i];
+>>>>>>> 40b1898833b06aaac759a7189aface117aa3ec8c
         }
+        background = new_background;
     }
 
     function up()
@@ -263,9 +273,9 @@
 
         <div class="oriantation">
             <input type="button" class="button" value="@" on:click={bad_rotate}>
-            <input type="button" class="button" value="UP" on:click={up}>
-            <input type="button" class="button" value="@" on:click={rotate}>
-            <input type="button" class="button" value="DOWN" on:click={down}>
+            <input type="button" class="button" value="UP">
+            <input type="button" class="button" value="↻" on:click={rotate}>
+            <input type="button" class="button" value="DOWN">
         </div>
     </div>
 </div>
