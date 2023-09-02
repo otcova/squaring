@@ -183,14 +183,43 @@
     ///////////////////////////////////////////////////////////////////////////////
     function rotate()
     {
+        let new_background : string[] = [];
         for (let i = 0; i < NumberofPixels; ++i)
         {
             let ori = get_cord(i);
             let cord = get_number([ori[1], 8 - ori[0]]);
-            console.log(cord);
+            new_background[cord] = background[i];
+        }
+        background = new_background;
+    }
+
+    function bad_rotate()
+    {
+        for (let i = 0; i < NumberofPixels; ++i)
+        {
+            let ori = get_cord(i);
+            let cord = get_number([ori[1], 8 - ori[0]]);
             background[cord] = background[i];
         }
     }
+
+    function up()
+    {
+        for (let i = 0; i < 9; ++i)
+        {
+            background.push(background.shift() as string);
+        }
+        background = background;
+    }
+    function down()
+    {
+        for (let i = 0; i < 9; ++i)
+        {
+            background.unshift(background.pop() as string);
+        }
+        background = background;
+    }
+
 </script>
 
 <div class="container">
@@ -233,9 +262,10 @@
         </div>
 
         <div class="oriantation">
+            <input type="button" class="button" value="@" on:click={bad_rotate}>
+            <input type="button" class="button" value="UP" on:click={up}>
             <input type="button" class="button" value="@" on:click={rotate}>
-            <input type="button" class="button" value="UP">
-            <input type="button" class="button" value="DOWN">
+            <input type="button" class="button" value="DOWN" on:click={down}>
         </div>
     </div>
 </div>
@@ -267,8 +297,8 @@
         display: grid;
         box-sizing: border-box;
         position: relative;
-        grid-template-rows: 50fr;
-        grid-template-columns: 50fr 50fr 50fr;
+        grid-template-rows: 50fr 50fr;
+        grid-template-columns: 50fr 50fr;
 
         background-color: #3c4fc0;
         border-radius: 6px;
