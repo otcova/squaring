@@ -232,18 +232,25 @@
     }
 
     function right() {
-        for (let i = 0; i < 9; ++i) {
-            background.unshift(background.pop() as string);
+        let new_background :string[] = background;
+        for (let i = NumberofPixels - 1; i >= 0; --i) {
+            new_background[i] = background[i-1];
         }
-        background = background;
+        for(let i = 0; i < NumberofPixels; i += 9)
+            new_background[i] = background[i+8];
+        background = new_background;
     }
 
     function left() {
-        for (let i = 0; i < 9; ++i) {
-            background.unshift(background.pop() as string);
+        let new_background :string[] = background;
+        for (let i = 0; i < NumberofPixels; ++i) {
+            new_background[i] = background[i+1];
         }
-        background = background;
+        for(let i = 8; i < NumberofPixels; i += 9)
+            new_background[i] = background[i-8];
+        background = new_background;
     }
+
 </script>
 
 <div class="container">
@@ -294,9 +301,9 @@
             <input type="button" class="button" value="@" on:click={bad_rotate}/>
             <input type="button" class="button" value="UP" on:click={up} />
             <input type="button" class="button" value="↻" on:click={rotate} />
-            <input type="button" class="button" value="RIGHT" on:click={right}/>
-            <input type="button" class="button" value="DOWN" on:click={down}/>
             <input type="button" class="button" value="LEFT" on:click={left}/>
+            <input type="button" class="button" value="DOWN" on:click={down}/>
+            <input type="button" class="button" value="RIGHT" on:click={right}/>
 
         </div>
     </div>
