@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { NUMBER_OF_PROCESSORS } from "$env/static/private";
-
     const NumberofPixels = 81;
     let PaintingColor = 1; // default painting color // blue
     const COLORS = ["white", "blue", "red", "green", "orange", "yellow"];
@@ -11,11 +9,7 @@
     }
     
     //////////////////////////////////////////////////////
-    let background: string[] = [];
-
-    for (let i = 0; i < NumberofPixels; ++i) {
-        background[i] = "white"; // background
-    }
+    let background: string[] = Array(NumberofPixels).fill("white");
     /////////////////////////////////////////////////////
 
     function randInt(min: number, max: number) {
@@ -36,7 +30,11 @@
     }
 
     function get_number(cord: number[]) {
-        return cord[0] * 9 + cord[1];
+        return cord[0] * Math.sqrt(NumberofPixels) + cord[1];
+    }
+
+    function get_cord(i : number){
+        return [Math.trunc(i/Math.sqrt(NumberofPixels)), i%Math.sqrt(NumberofPixels)]
     }
 
     function make_number_array(begin: number, end: number) {
@@ -58,7 +56,7 @@
     function make_number_line(list_number: number[]) {
         let list: number[] = [];
         list_number.forEach((element) => {
-            for (let i = 0; i < 9; ++i) list.push(element * 9 + i);
+            for (let i = 0; i < Math.sqrt(NumberofPixels); ++i) list.push(element * Math.sqrt(NumberofPixels) + i);
         });
         return list;
     }
@@ -66,7 +64,7 @@
     function make_number_column(list_number: number[]) {
         let list: number[] = [];
         list_number.forEach((element) => {
-            for (let i = 0; i < 9; ++i) list.push(element + i * 9);
+            for (let i = 0; i < Math.sqrt(NumberofPixels); ++i) list.push(element + i * Math.sqrt(NumberofPixels));
         });
         return list;
     }
@@ -89,7 +87,7 @@
     function createSet(set: Set) {
         set.pos.forEach((element) => {
             let color: string = chooseColor(set.colors);
-            background[element+orientationX+orientationY*9] = color;
+            background[element+orientationX+orientationY*Math.sqrt(NumberofPixels)] = color;
         });
     }
 
@@ -186,7 +184,12 @@
     function rotate()
     {
         for (let i = 0; i < NumberofPixels; ++i)
-            background[i] = background[i+9];
+        {
+            let ori = get_cord(i);
+            let cord = get_number([ori[1], 8 - ori[0]]);
+            console.log(cord);
+            background[cord] = background[i];
+        }
     }
 </script>
 
