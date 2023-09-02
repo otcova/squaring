@@ -7,7 +7,7 @@
         pos: number[];
         colors: string[];
     }
-    
+
     //////////////////////////////////////////////////////
     let background: string[] = Array(NumberofPixels).fill("white");
     /////////////////////////////////////////////////////
@@ -33,8 +33,11 @@
         return cord[0] * Math.sqrt(NumberofPixels) + cord[1];
     }
 
-    function get_cord(i : number){
-        return [Math.trunc(i/Math.sqrt(NumberofPixels)), i%Math.sqrt(NumberofPixels)]
+    function get_cord(i: number) {
+        return [
+            Math.trunc(i / Math.sqrt(NumberofPixels)),
+            i % Math.sqrt(NumberofPixels),
+        ];
     }
 
     function make_number_array(begin: number, end: number) {
@@ -56,7 +59,8 @@
     function make_number_line(list_number: number[]) {
         let list: number[] = [];
         list_number.forEach((element) => {
-            for (let i = 0; i < Math.sqrt(NumberofPixels); ++i) list.push(element * Math.sqrt(NumberofPixels) + i);
+            for (let i = 0; i < Math.sqrt(NumberofPixels); ++i)
+                list.push(element * Math.sqrt(NumberofPixels) + i);
         });
         return list;
     }
@@ -64,7 +68,8 @@
     function make_number_column(list_number: number[]) {
         let list: number[] = [];
         list_number.forEach((element) => {
-            for (let i = 0; i < Math.sqrt(NumberofPixels); ++i) list.push(element + i * Math.sqrt(NumberofPixels));
+            for (let i = 0; i < Math.sqrt(NumberofPixels); ++i)
+                list.push(element + i * Math.sqrt(NumberofPixels));
         });
         return list;
     }
@@ -87,49 +92,60 @@
     function createSet(set: Set) {
         set.pos.forEach((element) => {
             let color: string = chooseColor(set.colors);
-            background[element+orientationX+orientationY*Math.sqrt(NumberofPixels)] = color;
+            background[
+                element +
+                    orientationX +
+                    orientationY * Math.sqrt(NumberofPixels)
+            ] = color;
         });
     }
 
     /////////////////////////////////////////////////////
 
-        function make_face() {
+    function make_face() {
         const lefteye = make_rec([3, 2], [4, 3]);
         const righteye = make_rec([3, 5], [4, 6]);
-        
+
         //ears
-        let ears : Set = {
-            pos: make_arrayOfarray([[get_number([0, 1])], [get_number([1, 2])], [get_number([0, 5])], [get_number([1, 6])]]),
+        let ears: Set = {
+            pos: make_arrayOfarray([
+                [get_number([0, 1])],
+                [get_number([1, 2])],
+                [get_number([0, 5])],
+                [get_number([1, 6])],
+            ]),
             colors: [chooseColor(["green", "orange"])],
-        }
+        };
 
         let face: Set = {
             pos: make_arrayOfarray([make_rec([2, 1], [6, 7])]),
             colors: [chooseColor(["green", "orange"])],
         };
- 
+
         let eyes: Set = {
             pos: make_arrayOfarray([lefteye, righteye]),
             colors: ["blue", "red"],
         };
-  
+
         let mouth: Set = {
             pos: make_arrayOfarray([make_rec([7, 1], [7, 7])]),
             colors: ["green", "yellow"],
         };
 
-        let legs : Set = {
-            pos: make_arrayOfarray([make_rec([7, 2], [8, 2]), make_rec([7, 4], [8, 4]), make_rec([7, 6], [8, 6])]),
+        let legs: Set = {
+            pos: make_arrayOfarray([
+                make_rec([7, 2], [8, 2]),
+                make_rec([7, 4], [8, 4]),
+                make_rec([7, 6], [8, 6]),
+            ]),
             colors: [chooseColor(["green", "yellow"])],
-        }
-
+        };
 
         return [face, ears, eyes, legs];
     }
 
     //////////////////////////////////////////////////////////////////
-    function make_list_set()
-    {
+    function make_list_set() {
         return make_face();
     }
 
@@ -181,55 +197,38 @@
         })
         .filter((v) => v);
     ///////////////////////////////////////////////////////////////////////////////
-    function rotate()
-    {
-<<<<<<< HEAD
-        let new_background : string[] = [];
-        for (let i = 0; i < NumberofPixels; ++i)
-        {
+    function bad_rotate() {
+        for (let i = 0; i < NumberofPixels; ++i) {
             let ori = get_cord(i);
             let cord = get_number([ori[1], 8 - ori[0]]);
-            new_background[cord] = background[i];
+            console.log(cord);
+            background[cord] = background[i];
         }
-        background = new_background;
     }
 
-    function bad_rotate()
-    {
-=======
+    function rotate() {
         let new_background: string[] = [];
->>>>>>> 40b1898833b06aaac759a7189aface117aa3ec8c
-        for (let i = 0; i < NumberofPixels; ++i)
-        {
+        for (let i = 0; i < NumberofPixels; ++i) {
             let ori = get_cord(i);
             let cord = get_number([ori[1], 8 - ori[0]]);
-<<<<<<< HEAD
-            background[cord] = background[i];
-=======
             console.log(cord);
             new_background[cord] = background[i];
->>>>>>> 40b1898833b06aaac759a7189aface117aa3ec8c
         }
         background = new_background;
     }
 
-    function up()
-    {
-        for (let i = 0; i < 9; ++i)
-        {
+    function up() {
+        for (let i = 0; i < 9; ++i) {
             background.push(background.shift() as string);
         }
         background = background;
     }
-    function down()
-    {
-        for (let i = 0; i < 9; ++i)
-        {
+    function down() {
+        for (let i = 0; i < 9; ++i) {
             background.unshift(background.pop() as string);
         }
         background = background;
     }
-
 </script>
 
 <div class="container">
@@ -253,7 +252,6 @@
                     on:click={() => change_paitingColor(i)}
                 />
             {/each}
-            
         </div>
         <div class="set">
             <input
@@ -268,14 +266,24 @@
                 value="RANDOM SET"
                 on:click={randomSet}
             />
-            <input type="button" class="button" value="RESET" on:click={reset} />
+            <input
+                type="button"
+                class="button"
+                value="RESET"
+                on:click={reset}
+            />
         </div>
 
         <div class="oriantation">
-            <input type="button" class="button" value="@" on:click={bad_rotate}>
-            <input type="button" class="button" value="UP">
-            <input type="button" class="button" value="↻" on:click={rotate}>
-            <input type="button" class="button" value="DOWN">
+            <input
+                type="button"
+                class="button"
+                value="@"
+                on:click={bad_rotate}
+            />
+            <input type="button" class="button" value="UP" />
+            <input type="button" class="button" value="↻" on:click={rotate} />
+            <input type="button" class="button" value="DOWN" />
         </div>
     </div>
 </div>
@@ -314,7 +322,6 @@
         border-radius: 6px;
         padding: 8px;
         gap: 5px;
-
     }
 
     .set {
@@ -328,7 +335,6 @@
         border-radius: 6px;
         padding: 8px;
         gap: 5px;
-
     }
 
     .input {
