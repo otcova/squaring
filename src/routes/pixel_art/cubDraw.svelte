@@ -281,9 +281,9 @@
                 value="@"
                 on:click={bad_rotate}
             />
-            <input type="button" class="button" value="UP" />
+            <input type="button" class="button" value="UP" on:click={up} />
             <input type="button" class="button" value="↻" on:click={rotate} />
-            <input type="button" class="button" value="DOWN" />
+            <input type="button" class="button" value="DOWN" on:click={down}/>
         </div>
     </div>
 </div>
