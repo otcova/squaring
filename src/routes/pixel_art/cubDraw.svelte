@@ -306,10 +306,9 @@
         return "#000000";
     }
 
+    let rgbColor : HTMLInputElement;
     onMount(() => {
-        let rgbColor: HTMLInputElement;
         rgbColor.value = colortorgb();
-
     });
 
 </script>
