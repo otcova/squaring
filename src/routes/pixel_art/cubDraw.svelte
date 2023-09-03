@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
 
-    const NumberofLayer = 9;
+    const NumberofLayer = 100;
     const NumberofPixels = NumberofLayer * NumberofLayer;
     let PaintingColor = 1; // default painting color // blue
     const COLORS = ["white", "blue", "red", "green", "orange", "yellow"];
@@ -175,6 +175,7 @@
 
     function change_paitingColor(color: number) {
         PaintingColor = color;
+        rgbColor.value = colortorgb();
     }
 
     function handleMouseMove(event: MouseEvent, i: number) {
@@ -307,9 +308,11 @@
     }
 
     let rgbColor : HTMLInputElement;
+  
     onMount(() => {
         rgbColor.value = colortorgb();
     });
+    
 
 </script>
 <svelte:window on:keydown={(event) => key_action(event)} />
@@ -562,7 +565,7 @@
 
     .face {
         display: grid;
-        grid-template-columns: repeat(9, 1fr); /*change layer*/
+        grid-template-columns: repeat(100, 1fr); /*change layer*/
 
         position: fixed;
         bottom: 100px;
@@ -584,18 +587,21 @@
     .pixel {
         background: white;
         border-radius: 5px;
+        margin: 1%;
     }
 
     .border_right {
         border-radius: 2px;
         border-bottom-left-radius: 7px;
         border-top-left-radius: 7px;
+
     }
 
     .border_left {
         border-radius: 2px;
         border-bottom-right-radius: 7px;
         border-top-right-radius: 7px;
+
     }
 
     .border_top {
