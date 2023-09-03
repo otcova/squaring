@@ -1,5 +1,7 @@
 <script lang="ts">
-    const NumberofLayer = 50;
+    import { onMount } from "svelte";
+
+    const NumberofLayer = 9;
     const NumberofPixels = NumberofLayer * NumberofLayer;
     let PaintingColor = 1; // default painting color // blue
     const COLORS = ["white", "blue", "red", "green", "orange", "yellow"];
@@ -279,17 +281,41 @@
     function keyDown(event: KeyboardEvent) {
         if (event.repeat) return;
         
-        if (event.key == "ArrowUp") keyLoops.set(event.key, setInterval(up, 10));
-        if (event.key == "ArrowDown") keyLoops.set(event.key, setInterval(down, 10));
-        if (event.key == "ArrowLeft") keyLoops.set(event.key, setInterval(left, 10));
-        if (event.key == "ArrowRight") keyLoops.set(event.key, setInterval(right, 10));
+        clearInterval(keyLoops.get(event.key));
+        if (event.key == "ArrowUp") keyLoops.set(event.key, setInterval(up, 80));
+        if (event.key == "ArrowDown") keyLoops.set(event.key, setInterval(down, 80));
+        if (event.key == "ArrowLeft") keyLoops.set(event.key, setInterval(left, 80));
+        if (event.key == "ArrowRight") keyLoops.set(event.key, setInterval(right, 80));
     }
-
+    
     function keyUp(event: KeyboardEvent) {
         clearInterval(keyLoops.get(event.key));
     }
 
     const keyLoops = new Map();
+    
+    /////////////////////////////////////////////////////////
+    function colortorgb() {
+        if (PaintingColor == 0)
+            return "#ffffff";
+        if (PaintingColor == 1)
+            return "#0000ff";
+        if (PaintingColor == 2)
+            return "#ff0000";
+        if (PaintingColor == 3)
+            return "#008000";
+        if (PaintingColor == 4)
+            return "#ff6600";
+        if (PaintingColor == 5)
+            return "#ffff00";
+        return "#000000";
+    }
+
+    let rgbColor : HTMLInputElement;
+    onMount(() => {
+        rgbColor.value = colortorgb();
+    });
+
 </script>
 
 <svelte:window on:keydown={keyDown} on:keyup={keyUp} />
@@ -319,7 +345,7 @@
                 {/each}
             </div>
             <div class="rgb">
-                <input type="color" class="button2" name="rgb" id="rgb" />
+                <input type="color" class="button2" name="rgb" id="rgb" bind:this = {rgbColor}>
             </div>
         </div>
 
@@ -519,8 +545,7 @@
 
     .face {
         display: grid;
-        grid-template-columns: repeat(50, 1fr); /*change layer*/
-
+        grid-template-columns: repeat(9, 1fr); /*change layer*/
         position: fixed;
         bottom: 100px;
         left: 500px;
@@ -567,21 +592,21 @@
     }
 
     .yellow {
-        background: #ff0;
+        background: #ffff00;
     }
     .red {
-        background: red;
+        background: #ff0000;
     }
     .green {
-        background: green;
+        background: #008000;
     }
     .blue {
-        background: blue;
+        background: #0000ff;
     }
     .white {
-        background: white;
+        background: #ffffff;
     }
     .orange {
-        background: #f60;
+        background: #ff6600;
     }
 </style>
