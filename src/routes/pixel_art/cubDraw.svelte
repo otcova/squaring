@@ -1,5 +1,5 @@
 <script lang="ts">
-    const NumberofLayer = 100;
+    const NumberofLayer = 50;
     const NumberofPixels = NumberofLayer * NumberofLayer;
     let PaintingColor = 1; // default painting color // blue
     const COLORS = ["white", "blue", "red", "green", "orange", "yellow"];
@@ -276,19 +276,23 @@
     }
     ////////////////////////////////////////////////////////
 
-    function key_action(event : KeyboardEvent) {
-        console.log(event);
-        if (event.key == 'ArrowUp')
-            up();
-        if (event.key == 'ArrowDown')
-            down();
-        if (event.key == 'ArrowLeft')
-            left();
-        if (event.key == 'ArrowRight')
-            right();
+    function keyDown(event: KeyboardEvent) {
+        if (event.repeat) return;
+        
+        if (event.key == "ArrowUp") keyLoops.set(event.key, setInterval(up, 10));
+        if (event.key == "ArrowDown") keyLoops.set(event.key, setInterval(down, 10));
+        if (event.key == "ArrowLeft") keyLoops.set(event.key, setInterval(left, 10));
+        if (event.key == "ArrowRight") keyLoops.set(event.key, setInterval(right, 10));
     }
+
+    function keyUp(event: KeyboardEvent) {
+        clearInterval(keyLoops.get(event.key));
+    }
+
+    const keyLoops = new Map();
 </script>
-<svelte:window on:keydown={(event) => key_action(event)} />
+
+<svelte:window on:keydown={keyDown} on:keyup={keyUp} />
 
 <div class="container">
     <div class="face">
@@ -315,7 +319,7 @@
                 {/each}
             </div>
             <div class="rgb">
-                <input type="color" class="button2" name="rgb" id="rgb">
+                <input type="color" class="button2" name="rgb" id="rgb" />
             </div>
         </div>
 
@@ -347,31 +351,11 @@
                 value="@"
                 on:click={bad_rotate}
             />
-            <input
-                type="button"
-                class="button"
-                value="▲"
-                on:click={up}
-            />
+            <input type="button" class="button" value="▲" on:click={up} />
             <input type="button" class="button" value="↻" on:click={rotate} />
-            <input
-                type="button"
-                class="button"
-                value="◄"
-                on:click={left}
-            />
-            <input
-                type="button"
-                class="button"
-                value="▼"
-                on:click={down}
-            />
-            <input
-                type="button"
-                class="button"
-                value="►"
-                on:click={right}
-            />
+            <input type="button" class="button" value="◄" on:click={left} />
+            <input type="button" class="button" value="▼" on:click={down} />
+            <input type="button" class="button" value="►" on:click={right} />
         </div>
     </div>
 </div>
@@ -469,8 +453,6 @@
 
         bottom: 100px;
         left: 1300px;
-
-
     }
 
     .button2 {
@@ -498,7 +480,6 @@
         width: 100%;
         height: 100%;
     }
-
 
     .button {
         display: inline-block;
@@ -538,7 +519,7 @@
 
     .face {
         display: grid;
-        grid-template-columns: repeat(100, 1fr); /*change layer*/
+        grid-template-columns: repeat(50, 1fr); /*change layer*/
 
         position: fixed;
         bottom: 100px;
