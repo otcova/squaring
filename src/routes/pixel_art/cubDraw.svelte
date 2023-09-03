@@ -1,5 +1,7 @@
 <script lang="ts">
-    const NumberofLayer = 100;
+    import { onMount } from "svelte";
+
+    const NumberofLayer = 9;
     const NumberofPixels = NumberofLayer * NumberofLayer;
     let PaintingColor = 1; // default painting color // blue
     const COLORS = ["white", "blue", "red", "green", "orange", "yellow"];
@@ -287,6 +289,29 @@
         if (event.key == 'ArrowRight')
             right();
     }
+    /////////////////////////////////////////////////////////
+    function colortorgb() {
+        if (PaintingColor == 0)
+            return "#ffffff";
+        if (PaintingColor == 1)
+            return "#0000ff";
+        if (PaintingColor == 2)
+            return "#ff0000";
+        if (PaintingColor == 3)
+            return "#008000";
+        if (PaintingColor == 4)
+            return "#ff6600";
+        if (PaintingColor == 5)
+            return "#ffff00";
+        return "#000000";
+    }
+
+    onMount(() => {
+        let rgbColor: HTMLInputElement;
+        rgbColor.value = colortorgb();
+
+    });
+
 </script>
 <svelte:window on:keydown={(event) => key_action(event)} />
 
@@ -315,7 +340,7 @@
                 {/each}
             </div>
             <div class="rgb">
-                <input type="color" class="button2" name="rgb" id="rgb">
+                <input type="color" class="button2" name="rgb" id="rgb" bind:this = {rgbColor}>
             </div>
         </div>
 
@@ -538,7 +563,7 @@
 
     .face {
         display: grid;
-        grid-template-columns: repeat(100, 1fr); /*change layer*/
+        grid-template-columns: repeat(9, 1fr); /*change layer*/
 
         position: fixed;
         bottom: 100px;
@@ -586,21 +611,21 @@
     }
 
     .yellow {
-        background: #ff0;
+        background: #ffff00;
     }
     .red {
-        background: red;
+        background: #ff0000;
     }
     .green {
-        background: green;
+        background: #008000;
     }
     .blue {
-        background: blue;
+        background: #0000ff;
     }
     .white {
-        background: white;
+        background: #ffffff;
     }
     .orange {
-        background: #f60;
+        background: #ff6600;
     }
 </style>
