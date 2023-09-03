@@ -303,16 +303,22 @@
     </div>
 
     <div class="input">
-        <div class="colors">
-            {#each COLORS as color, i}
-                <input
-                    type="button"
-                    class="button {color}"
-                    value="   "
-                    on:click={() => change_paitingColor(i)}
-                />
-            {/each}
+        <div class="painting">
+            <div class="colors">
+                {#each COLORS as color, i}
+                    <input
+                        type="button"
+                        class="button {color}"
+                        value="   "
+                        on:click={() => change_paitingColor(i)}
+                    />
+                {/each}
+            </div>
+            <div class="rgb">
+                <input type="color" class="button2" name="rgb" id="rgb">
+            </div>
         </div>
+
         <div class="set">
             <input
                 type="button"
@@ -389,6 +395,29 @@
         font-size: 18px;
     }
 
+    .painting {
+        display: grid;
+        box-sizing: border-box;
+        position: relative;
+        grid-template-rows: 50fr;
+        grid-template-columns: 50fr 50fr;
+
+        background-color: #3c50c0;
+        border-radius: 6px;
+        padding: 4px;
+        gap: 5px;
+
+        width: 250px;
+    }
+
+    .rgb {
+        display: block;
+        box-sizing: border-box;
+        position: relative;
+        padding: 4px;
+        border-radius: 6px;
+    }
+
     .colors {
         display: grid;
         box-sizing: border-box;
@@ -396,19 +425,21 @@
         grid-template-rows: 50fr 50fr;
         grid-template-columns: 50fr 50fr 50fr;
 
-        background-color: #3c50c0;
-        border-radius: 6px;
-        padding: 8px;
-        gap: 5px;
+        height: 100px;
 
-        width: 170px;
+        border-radius: 6px;
+        padding: 4px;
+        gap: 5px;
     }
+
     .oriantation {
         display: grid;
         box-sizing: border-box;
         position: relative;
         grid-template-rows: 50fr 50fr;
         grid-template-columns: 50fr 50fr 50fr;
+
+        height: 100px;
 
         background-color: #3c50c0;
         border-radius: 6px;
@@ -423,6 +454,8 @@
         grid-template-rows: 50fr;
         grid-template-columns: 50fr 50fr 50fr;
 
+        height: 75px;
+
         background-color: #3c50c0;
         border-radius: 6px;
         padding: 8px;
@@ -436,7 +469,36 @@
 
         bottom: 100px;
         left: 1300px;
+
+
     }
+
+    .button2 {
+        display: inline-block;
+        outline: none;
+        border: none;
+        cursor: pointer;
+
+        will-change: box-shadow, transform;
+        background: radial-gradient(
+            100% 100% at 100% 0%,
+            #89e5ff 0%,
+            #5468ff 100%
+        );
+        box-shadow: 0px 2px 4px rgb(45 35 66 / 40%),
+            0px 7px 13px -3px rgb(45 35 66 / 30%),
+            inset 0px -3px 0px rgb(58 65 111 / 50%);
+        border-radius: 6px;
+        color: #fff;
+        height: 48px;
+        font-size: 18px;
+        text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+        transition: box-shadow 0.15s ease, transform 0.15s ease;
+
+        width: 100%;
+        height: 100%;
+    }
+
 
     .button {
         display: inline-block;
@@ -460,6 +522,9 @@
         font-size: 18px;
         text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
         transition: box-shadow 0.15s ease, transform 0.15s ease;
+
+        width: 100%;
+        height: 100%;
     }
     .button:hover {
         box-shadow: 0px 4px 8px rgb(45 35 66 / 40%),
