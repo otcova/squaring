@@ -275,18 +275,20 @@
         background = new_background;
     }
     ////////////////////////////////////////////////////////
+
     function key_action(event : KeyboardEvent) {
         console.log(event);
-        if (event.key == 'ArrowUp') 
+        if (event.key == 'ArrowUp')
             up();
-        else if (event.key == 'ArrowDown')
+        if (event.key == 'ArrowDown')
             down();
-        else if (event.key == 'ArrowLeft')
+        if (event.key == 'ArrowLeft')
             left();
-        else if (event.key == 'ArrowRight')
+        if (event.key == 'ArrowRight')
             right();
     }
 </script>
+<svelte:window on:keydown={(event) => key_action(event)} />
 
 <div class="container">
     <div class="face">
@@ -344,7 +346,6 @@
                 class="button"
                 value="▲"
                 on:click={up}
-                on:keydown={(event) => key_action(event)}
             />
             <input type="button" class="button" value="↻" on:click={rotate} />
             <input
@@ -352,21 +353,18 @@
                 class="button"
                 value="◄"
                 on:click={left}
-                on:keydown={(event) => key_action(event)}
             />
             <input
                 type="button"
                 class="button"
                 value="▼"
                 on:click={down}
-                on:keydown={(event) => key_action(event)}
             />
             <input
                 type="button"
                 class="button"
                 value="►"
                 on:click={right}
-                on:keydown={(event) => key_action(event)}
             />
         </div>
     </div>
