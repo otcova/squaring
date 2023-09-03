@@ -1,5 +1,6 @@
 <script lang="ts">
-    const NumberofPixels = 81;
+    const NumberofLayer = 100;
+    const NumberofPixels = NumberofLayer * NumberofLayer;
     let PaintingColor = 1; // default painting color // blue
     const COLORS = ["white", "blue", "red", "green", "orange", "yellow"];
 
@@ -30,14 +31,11 @@
     }
 
     function get_number(cord: number[]) {
-        return cord[0] * Math.sqrt(NumberofPixels) + cord[1];
+        return cord[0] * NumberofLayer + cord[1];
     }
 
     function get_cord(i: number) {
-        return [
-            Math.trunc(i / Math.sqrt(NumberofPixels)),
-            i % Math.sqrt(NumberofPixels),
-        ];
+        return [Math.trunc(i / NumberofLayer), i % NumberofLayer];
     }
 
     function make_number_array(begin: number, end: number) {
@@ -59,8 +57,8 @@
     function make_number_line(list_number: number[]) {
         let list: number[] = [];
         list_number.forEach((element) => {
-            for (let i = 0; i < Math.sqrt(NumberofPixels); ++i)
-                list.push(element * Math.sqrt(NumberofPixels) + i);
+            for (let i = 0; i < NumberofLayer; ++i)
+                list.push(element * NumberofLayer + i);
         });
         return list;
     }
@@ -68,8 +66,8 @@
     function make_number_column(list_number: number[]) {
         let list: number[] = [];
         list_number.forEach((element) => {
-            for (let i = 0; i < Math.sqrt(NumberofPixels); ++i)
-                list.push(element + i * Math.sqrt(NumberofPixels));
+            for (let i = 0; i < NumberofLayer; ++i)
+                list.push(element + i * NumberofLayer);
         });
         return list;
     }
@@ -92,11 +90,8 @@
     function createSet(set: Set) {
         set.pos.forEach((element) => {
             let color: string = chooseColor(set.colors);
-            background[
-                element +
-                    orientationX +
-                    orientationY * Math.sqrt(NumberofPixels)
-            ] = color;
+            background[element + orientationX + orientationY * NumberofLayer] =
+                color;
         });
     }
 
@@ -184,9 +179,33 @@
         if (event.buttons == 1) changeColor(i);
     }
     ////////////////////////////////////////////////////////////////////////////////////
-    const PIXELS_STYLE = Array.from(
-        "ptttttttp lpppppppr lpppppppr lpppppppr lpppcpppr lpppppppr lpppppppr lpppppppr pbbbbbbbp"
-    )
+    function make_cub() {
+        let list: string = "";
+        for (let i = 0; i < NumberofLayer; ++i) {
+            for (let j = 0; j < NumberofLayer; ++j) {
+                if (i == 0 && j != 0 && j != NumberofLayer - 1) list += "t";
+                else if (
+                    i == NumberofLayer - 1 &&
+                    j != 0 &&
+                    j != NumberofLayer - 1
+                )
+                    list += "b";
+                else if (i != 0 && i != NumberofLayer - 1 && j == 0)
+                    list += "l";
+                else if (
+                    i != 0 &&
+                    i != NumberofLayer - 1 &&
+                    j == NumberofLayer - 1
+                )
+                    list += "r";
+                else list += "p";
+            }
+            list += " ";
+        }
+        return list;
+    }
+
+    const PIXELS_STYLE = Array.from(make_cub())
         .map((c) => {
             if (c == "p") return "pixel";
             if (c == "t") return "pixel border_top";
@@ -200,55 +219,63 @@
     function bad_rotate() {
         for (let i = 0; i < NumberofPixels; ++i) {
             let ori = get_cord(i);
-            let cord = get_number([ori[1], 8 - ori[0]]);
-            console.log(cord);
+            let cord = get_number([ori[1], NumberofLayer - 1 - ori[0]]);
             background[cord] = background[i];
         }
+    }
+
+    function scramble() {
+        let new_background: string[] = [];
+        for (let i = 0; i < NumberofPixels; ++i) {
+            new_background[i] = background[randInt(0, NumberofPixels)];
+        }
+        background = new_background;
     }
 
     function rotate() {
         let new_background: string[] = [];
         for (let i = 0; i < NumberofPixels; ++i) {
             let ori = get_cord(i);
-            let cord = get_number([ori[1], 8 - ori[0]]);
-            console.log(cord);
+            let cord = get_number([ori[1], NumberofLayer - 1 - ori[0]]);
             new_background[cord] = background[i];
         }
         background = new_background;
     }
 
     function up() {
-        for (let i = 0; i < 9; ++i) {
+        for (let i = 0; i < NumberofLayer; ++i) {
             background.push(background.shift() as string);
         }
         background = background;
     }
 
     function down() {
-        for (let i = 0; i < 9; ++i) {
+        for (let i = 0; i < NumberofLayer; ++i) {
             background.unshift(background.pop() as string);
         }
         background = background;
     }
 
     function right() {
-        let new_background :string[] = [];
-        for (let i = NumberofPixels - 1; i >= 0; --i) 
-            new_background[i] = background[i-1];
-        for(let i = 0; i < NumberofPixels; i += 9)
-            new_background[i] = background[i+8];
+        let new_background: string[] = [];
+        for (let i = NumberofPixels - 1; i >= 0; --i)
+            new_background[i] = background[i - 1];
+        for (let i = 0; i < NumberofPixels; i += NumberofLayer)
+            new_background[i] = background[i + NumberofLayer - 1];
         background = new_background;
     }
 
     function left() {
-        let new_background :string[] = [];
-        for (let i = 0; i < NumberofPixels; ++i) 
-            new_background[i] = background[i+1];    
-        for (let i = 8; i < NumberofPixels; i += 9)
-            new_background[i] = background[i-8];
+        let new_background: string[] = [];
+        for (let i = 0; i < NumberofPixels; ++i)
+            new_background[i] = background[i + 1];
+        for (let i = NumberofLayer - 1; i < NumberofPixels; i += NumberofLayer)
+            new_background[i] = background[i - NumberofLayer + 1];
+
         background = new_background;
     }
 
+    function key_action() {}
 </script>
 
 <div class="container">
@@ -262,7 +289,7 @@
             />
         {/each}
     </div>
-    
+
     <div class="input">
         <div class="colors">
             {#each COLORS as color, i}
@@ -296,13 +323,41 @@
         </div>
 
         <div class="oriantation">
-            <input type="button" class="button" value="@" on:click={bad_rotate}/>
-            <input type="button" class="button" value="▲" on:click={up} />
+            <input
+                type="button"
+                class="button"
+                value="@"
+                on:click={bad_rotate}
+            />
+            <input
+                type="button"
+                class="button"
+                value="▲"
+                on:click={up}
+                on:keypress={(event) => key_action()}
+            />
             <input type="button" class="button" value="↻" on:click={rotate} />
-            <input type="button" class="button" value="◄" on:click={left}/>
-            <input type="button" class="button" value="▼" on:click={down}/>
-            <input type="button" class="button" value="►" on:click={right}/>
-
+            <input
+                type="button"
+                class="button"
+                value="◄"
+                on:click={left}
+                on:keypress={(event) => key_action()}
+            />
+            <input
+                type="button"
+                class="button"
+                value="▼"
+                on:click={down}
+                on:keypress={(event) => key_action()}
+            />
+            <input
+                type="button"
+                class="button"
+                value="►"
+                on:click={right}
+                on:keypress={(event) => key_action()}
+            />
         </div>
     </div>
 </div>
@@ -312,8 +367,6 @@
         display: block;
         box-sizing: border-box;
         position: fixed;
-        margin-left: 500px;
-        margin-right: 0;
     }
 
     .title {
@@ -412,24 +465,25 @@
 
     .face {
         display: grid;
-        grid-template-columns: repeat(9, 1fr);
+        grid-template-columns: repeat(100, 1fr); /*change layer*/
+
+        position: fixed;
+        bottom: 100px;
+        left: 500px;
+
         background: black;
         border-radius: 7px;
-        padding: 2px;
-        margin: 5px;
-        gap: 2px;
+        gap: 0px;
+        width: 750px;
+        height: 750px;
     }
 
     .center {
-        height: 75px;
-        width: 75px;
         background: white;
         border-radius: 15px;
     }
 
     .pixel {
-        height: 75px;
-        width: 75px;
         background: white;
         border-radius: 5px;
     }
