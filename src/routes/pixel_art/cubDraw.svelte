@@ -274,8 +274,18 @@
 
         background = new_background;
     }
-
-    function key_action() {}
+    ////////////////////////////////////////////////////////
+    function key_action(event : KeyboardEvent) {
+        console.log(event);
+        if (event.key == 'ArrowUp') 
+            up();
+        else if (event.key == 'ArrowDown')
+            down();
+        else if (event.key == 'ArrowLeft')
+            left();
+        else if (event.key == 'ArrowRight')
+            right();
+    }
 </script>
 
 <div class="container">
@@ -334,7 +344,7 @@
                 class="button"
                 value="▲"
                 on:click={up}
-                on:keypress={(event) => key_action()}
+                on:keydown={(event) => key_action(event)}
             />
             <input type="button" class="button" value="↻" on:click={rotate} />
             <input
@@ -342,21 +352,21 @@
                 class="button"
                 value="◄"
                 on:click={left}
-                on:keypress={(event) => key_action()}
+                on:keydown={(event) => key_action(event)}
             />
             <input
                 type="button"
                 class="button"
                 value="▼"
                 on:click={down}
-                on:keypress={(event) => key_action()}
+                on:keydown={(event) => key_action(event)}
             />
             <input
                 type="button"
                 class="button"
                 value="►"
                 on:click={right}
-                on:keypress={(event) => key_action()}
+                on:keydown={(event) => key_action(event)}
             />
         </div>
     </div>
@@ -474,6 +484,7 @@
         background: black;
         border-radius: 7px;
         gap: 0px;
+        padding: 1px;
         width: 750px;
         height: 750px;
     }
